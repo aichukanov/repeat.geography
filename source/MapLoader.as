@@ -7,6 +7,8 @@
 	import flash.display.Sprite;
 	import flash.display.Bitmap;
 	
+	import flash.events.Event;
+	
 	public class MapLoader extends Sprite {
 
 		private var geoLoader:GeoLoader = new GeoLoader();
@@ -93,7 +95,9 @@
 			try {
 				geoLoader.removeEventListener(XMLEvent.XML_LOAD_SUCCESS,onLoadAtlas);
 				geoLoader.removeEventListener(XMLEvent.XML_LOAD_ERROR,onLoadAtlasError);
+				
 				trace("MapLoader onLoadAtlasError()");
+				dispatchEvent(new MapEvent(MapEvent.MAP_LOAD_ERROR));				
 			}
 			catch (e:Error) {
 				trace("MapLoader onLoadAtlasError()",e.message);
@@ -104,7 +108,9 @@
 			try {
 				geoLoader.removeEventListener(XMLEvent.XML_LOAD_SUCCESS,onLoadMapXML);
 				geoLoader.removeEventListener(XMLEvent.XML_LOAD_ERROR,onLoadMapXMLError);
+				
 				trace("MapLoader onLoadMapXMLError()");
+				dispatchEvent(new MapEvent(MapEvent.MAP_LOAD_ERROR));
 			}
 			catch (e:Error) {
 				trace("MapLoader onLoadMapXMLError()",e.message);
@@ -115,7 +121,9 @@
 			try {
 				geoLoader.removeEventListener(ImageEvent.IMAGE_LOAD_SUCCESS,onLoadMapPNG);
 				geoLoader.removeEventListener(ImageEvent.IMAGE_LOAD_ERROR,onLoadMapPNGError);
+				
 				trace("MapLoader onLoadMapPNGError()");
+				dispatchEvent(new MapEvent(MapEvent.MAP_LOAD_ERROR));
 			}
 			catch (e:Error) {
 				trace("MapLoader onLoadMapPNGError()",e.message);

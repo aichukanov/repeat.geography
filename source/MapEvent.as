@@ -16,7 +16,7 @@
 		private var _bmp:Bitmap;
 		private var _bmpXML:XML;
          
-		public function MapEvent(type:String, atlas:Object, bmp:Bitmap, bmpXML:XML, bubbles:Boolean = false, cancelable:Boolean = false) {
+		public function MapEvent(type:String, atlas:Object = null, bmp:Bitmap = null, bmpXML:XML = null, bubbles:Boolean = false, cancelable:Boolean = false) {
  			super(type, bubbles, cancelable);
 			_atlas = atlas;
 			_bmp = bmp;

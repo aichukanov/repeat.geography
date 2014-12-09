@@ -20,11 +20,6 @@
 		public static const SELECTED_CORRECT:String	= "selectedCorrect";
 		public static const SELECTED_WRONG:String	= "selectedWrong";
 		
-		public var areaName:String 	= "";
-		public var areaColor:uint 	= 0xFFFFFF;
-		public var isDefined:Boolean 	= false;
-		public var isWrong:Boolean 	= false;
-		
 		public const colorObj:Object = {
 			colorWrong:0xFF0000,
 			colorWrongHover:0xFF3333,
@@ -33,6 +28,12 @@
 			colorDefault:0xFFFFFF,
 			colorDefaultHover:0x33FFFF
 		}
+		
+		public var areaName:String 	= "";
+		public var areaColor:uint 	= 0xFFFFFF;
+		public var isDefined:Boolean 	= false;
+		public var isWrong:Boolean 		= false;
+		
 		
 		public var hint:Hint;
 		public var minY:Number = 50;
