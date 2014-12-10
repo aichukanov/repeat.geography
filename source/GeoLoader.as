@@ -24,7 +24,7 @@
 		public function loadAtlas(str:String):void {
 			try {
 				var loader:URLLoader 	= new URLLoader();			
-				var req:URLRequest 	 	= new URLRequest("AtlasXML/" + str + ".xml");
+				var req:URLRequest 	 	= new URLRequest(("atlasxml/" + str + ".xml").toLowerCase());
 				loader.load(req);
 				loader.addEventListener(Event.COMPLETE,loadAtlasHandler);
 				loader.addEventListener(IOErrorEvent.IO_ERROR, loadAtlasIOErrorHandler);
@@ -62,7 +62,7 @@
 		public function loadMapPNG(str:String):void {
 			try {
 				var loader:Loader	= new Loader();			
-				var req:URLRequest	= new URLRequest("Maps/" + str + ".png");
+				var req:URLRequest	= new URLRequest(("maps/" + str + ".png").toLowerCase());
 				loader.load(req);
 				
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,loadMapPNGHandler);
@@ -101,7 +101,7 @@
 		public function loadMapXML(str:String):void {
 			try {
 				var loader:URLLoader	= new URLLoader();	
-				var req:URLRequest	= new URLRequest("Maps/" + str + ".xml");
+				var req:URLRequest	= new URLRequest(("maps/" + str + ".xml").toLowerCase());
 				loader.load(req);
 				loader.addEventListener(Event.COMPLETE,loadMapXMLHandler);
 				loader.addEventListener(IOErrorEvent.IO_ERROR, loadMapXMLIOErrorHandler);

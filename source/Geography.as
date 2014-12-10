@@ -13,7 +13,7 @@
 	
 	public class Geography extends Sprite 
 	{		
-		private static const topLevelMap:String = "earth";
+		private static const topLevelMap:String = "earth"; //"earth"
 	
 		private var map:Map;
 		
@@ -62,6 +62,8 @@
 				
 				bottomLine.x = 0;
 				bottomLine.y = stage.stageHeight - bottomLine.height;
+				
+				//bottomLine.tf.text = "hi";
 			}
 			catch (e:Error) {
 				trace("Geography addBottomLine()",e.message);
@@ -121,6 +123,7 @@
 		
 		private function addMap():void {
 			try {
+				//bottomLine.tf.text = "addMap() " + curArea.toString() + " " + curArea;
 				if (map) {
 					removeChild(map);
 					map.clearMap();
@@ -163,6 +166,7 @@
 					//startQuiz(evt.data.atlas);
 				}
 				catch (e:Error) {
+					//bottomLine.tf.text = "onMapLoadSucces()" + e.message;
 					trace("Geography onMapLoadSucces()",e.message);
 				}
 			}
@@ -173,6 +177,7 @@
 					goUpMap();
 				}
 				catch (e:Error) {
+					//bottomLine.tf.text = "onMapLoadError()" + e.message;
 					trace("Geography addMap onMapLoadError()",e.message);
 				}
 			}

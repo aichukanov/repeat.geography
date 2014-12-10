@@ -2,6 +2,10 @@
 	import starling.events.Event;
 	import starling.display.Sprite;
 	import starling.display.Quad;
+	import starling.utils.HAlign;
+	import starling.utils.VAlign;
+	import starling.text.TextField;
+	import flash.text.Font;
 
 	/**
 	 * ...
@@ -11,6 +15,8 @@
 	public class BottomLine extends Sprite {
 		[Embed(source = "/Media/fonts/Roboto-Italic.ttf", embedAsCFF = "false", fontName = "RobotoItalic")]
 		private static const RobotoItalic:Class;
+		
+		public var tf:TextField;
 		
 		private var logo:Logo = new Logo();
 		private var bg:Quad;
@@ -29,6 +35,7 @@
 			
 			addBG();
 			addLogo();
+			addTF();
 		}
 		
 		private function addBG():void {
@@ -44,6 +51,21 @@
 			//logo.scaleY = sc;
 			logo.x = 0;
 			logo.y = 0;
+		}
+		
+		private function addTF():void {
+			var font:Font = new RobotoItalic();
+			tf = new TextField(this.width - logo.width - 10, this.height, "", font.fontName, 30, 0xFFFFFF);
+				
+			tf.vAlign = VAlign.CENTER;
+			tf.hAlign = HAlign.LEFT;
+			
+			tf.x = logo.width + 10;
+			tf.y = 0;
+							
+			this.addChild(tf);
+			
+			tf.autoScale = true;
 		}
 	}
 }

@@ -29,7 +29,7 @@
 			colorDefaultHover:0x33FFFF
 		}
 		
-		public var areaName:String 	= "";
+		public var areaName:String 	= "";	// локализованное название области Russia - Россия - Russland
 		public var areaColor:uint 	= 0xFFFFFF;
 		public var isDefined:Boolean 	= false;
 		public var isWrong:Boolean 		= false;
