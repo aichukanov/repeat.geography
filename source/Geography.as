@@ -10,24 +10,26 @@
 	import starling.events.TouchEvent;
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
+	import starling.display.Image;
 	
 	public class Geography extends Sprite 
 	{	
 		private static const otherTextObj:Object = {
-			//question: "Where is "
-			question: "Где находится "
+			question_en: "Where is ",
+			question_ru: "Где находится "
 		}
-	
-		private static const topLevelMap:String = "earth"; //"earth"
+
+		private const topLevelMap:String = "earth"; //"earth"
+		
+		private const qh:Number 	= 40; // questionMC height
+		private const bh:Number 	= 40; // bottom line height
+		private const margin:Number = 10; // margin top and bottom
 	
 		private var map:Map;
 		
-		private var lang:String = "ru";
+		private var lang:String = "en";
 		
 		private var question:Question; 
-		private var qh:Number = 40; // questionMC height
-		private var bh:Number = 40; // bottom line
-		private var margin:Number = 10; // margin top and bottom
 		
 		private var curLvl:Array = []; //["earth","europe"]
 		private var curArea:String = topLevelMap;
@@ -80,11 +82,23 @@
 				addChild(gameMenu);
 				gameMenu.startBtn.addEventListener(TouchEvent.TOUCH, onStartTouch);
 				gameMenu.upBtn.addEventListener(TouchEvent.TOUCH, onUpTouch);
+				
+				gameMenu.enBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
+				gameMenu.ruBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
 				//gameMenu.x = stage.width  / 2 - gameMenu.width  / 2;
 				//gameMenu.y = stage.height / 2 - gameMenu.height / 2;
 			}
 			catch (e:Error) {
 				trace("Geography addGameMenu()",e.message);
+			}
+		}
+		
+		private function switchLanguage(evt:TouchEvent):void {
+			var t:Touch = evt.touches[0];
+			
+			if (t.phase == TouchPhase.ENDED) {
+				lang = (evt.currentTarget as Image).name;
+				addMap();
 			}
 		}
 		
@@ -241,7 +255,7 @@
 				removeChild(question);
 				question = null;
 				
-				question = new Question(otherTextObj["question"] + quizObj[aName].transName + "?", stage.stageWidth, qh);
+				question = new Question(otherTextObj["question_" + lang] + quizObj[aName].transName + "?", stage.stageWidth, qh);
 				addChild(question);
 				swapChildren(question,bottomLine);
 			}

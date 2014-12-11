@@ -10,6 +10,7 @@
 	
 	public class GeographyPreloader extends MovieClip {
 		
+		//private var path:String = "http://repeat.cc/apps/geography/";
 		private var path:String = "";
 		private var gameName:String = "Geography";
 		

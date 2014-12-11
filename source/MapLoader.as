@@ -87,7 +87,6 @@
 		private function onLoadLangXML(evt:XMLEvent):void {
 			geoLoader.removeEventListener(XMLEvent.XML_LOAD_SUCCESS,onLoadLangXML);
 			geoLoader.removeEventListener(XMLEvent.XML_LOAD_ERROR,onLoadLangXMLError);
-			trace("lang xml loaded");
 			
 			langObj = {};
 			

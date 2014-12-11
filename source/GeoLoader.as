@@ -17,6 +17,9 @@
 	
 	public class GeoLoader extends Sprite {
 		
+		//private var path:String = "http://repeat.cc/apps/geography/";
+		private var path:String = "";
+		
 		function GeoLoader() {
 			//
 		}
@@ -24,7 +27,7 @@
 		public function loadAtlas(str:String):void {
 			try {
 				var loader:URLLoader 	= new URLLoader();			
-				var req:URLRequest 	 	= new URLRequest(("atlasxml/" + str + ".xml").toLowerCase());
+				var req:URLRequest 	 	= new URLRequest((path + "atlasxml/" + str + ".xml").toLowerCase());
 				loader.load(req);
 				loader.addEventListener(Event.COMPLETE,loadAtlasHandler);
 				loader.addEventListener(IOErrorEvent.IO_ERROR, loadAtlasIOErrorHandler);
@@ -62,7 +65,7 @@
 		public function loadMapPNG(str:String):void {
 			try {
 				var loader:Loader	= new Loader();			
-				var req:URLRequest	= new URLRequest(("maps/" + str + ".png").toLowerCase());
+				var req:URLRequest	= new URLRequest((path + "maps/" + str + ".png").toLowerCase());
 				loader.load(req);
 				
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,loadMapPNGHandler);
@@ -101,7 +104,7 @@
 		public function loadMapXML(str:String):void {
 			try {
 				var loader:URLLoader	= new URLLoader();	
-				var req:URLRequest	= new URLRequest(("maps/" + str + ".xml").toLowerCase());
+				var req:URLRequest	= new URLRequest((path + "maps/" + str + ".xml").toLowerCase());
 				loader.load(req);
 				loader.addEventListener(Event.COMPLETE,loadMapXMLHandler);
 				loader.addEventListener(IOErrorEvent.IO_ERROR, loadMapXMLIOErrorHandler);
