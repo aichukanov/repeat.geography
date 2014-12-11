@@ -12,7 +12,12 @@
 	import starling.events.TouchPhase;
 	
 	public class Geography extends Sprite 
-	{		
+	{	
+		private static const otherTextObj:Object = {
+			//question: "Where is "
+			question: "Где находится "
+		}
+	
 		private static const topLevelMap:String = "earth"; //"earth"
 	
 		private var map:Map;
@@ -185,7 +190,7 @@
 		}
 		
 		private function goUpMap():void {
-			if (curLvl[0] == "") {
+			if (curLvl.length == 0) {
 				curArea = topLevelMap;
 			}
 			else {
@@ -236,7 +241,7 @@
 				removeChild(question);
 				question = null;
 				
-				question = new Question("Where is " + quizObj[aName].transName + "?", stage.stageWidth, qh);
+				question = new Question(otherTextObj["question"] + quizObj[aName].transName + "?", stage.stageWidth, qh);
 				addChild(question);
 				swapChildren(question,bottomLine);
 			}
