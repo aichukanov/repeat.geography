@@ -1,0 +1,46 @@
+<Atlas lang="en">
+  <Area name="Indonesia" title="Indonesia" />
+  <Area name="Yemen" title="Yemen" />
+  <Area name="Vietnam" title="Vietnam" />
+  <Area name="Uzbekistan" title="Uzbekistan" />	
+  <Area name="UnitedArabEmirates" title="United Arab Emirates" />
+  <Area name="Turkmenistan" title="Turkmenistan" />
+  <Area name="Turkey" title="Turkey" />
+  <Area name="Thailand" title="Thailand" />
+  <Area name="Tajikistan" title="Tajikistan" />
+  <Area name="Syria" title="Syria" />
+  <Area name="SriLanka" title="Sri Lanka" />
+  <Area name="SouthKorea" title="South Korea" />
+  <Area name="Singapore" title="Singapore" />
+  <Area name="SaudiArabia" title="Saudi Arabia" />
+  <Area name="Russia" title="Russia" />
+  <Area name="Qatar" title="Qatar" />
+  <Area name="Philippines" title="Philippines" />
+  <Area name="Pakistan" title="Pakistan" />
+  <Area name="Oman" title="Oman" />
+  <Area name="NorthKorea" title="North Korea" />
+  <Area name="Nepal" title="Nepal" />
+  <Area name="Mongolia" title="Mongolia" />
+  <Area name="Malaysia" title="Malaysia" />
+  <Area name="Lebanon" title="Lebanon" />
+  <Area name="Laos" title="Laos" />
+  <Area name="Kyrgyzstan" title="Kyrgyzstan" />
+  <Area name="Kuwait" title="Kuwait" />
+  <Area name="Kazakhstan" title="Kazakhstan" />
+  <Area name="Jordan" title="Jordan" />
+  <Area name="Japan" title="Japan" />
+  <Area name="Israel" title="Israel" />
+  <Area name="Iraq" title="Iraq" />
+  <Area name="Iran" title="Iran" />
+  <Area name="India" title="India" />
+  <Area name="Georgia" title="Georgia" />
+  <Area name="China" title="China" />
+  <Area name="Cambodia" title="Cambodia" />
+  <Area name="Burma" title="Burma" />
+  <Area name="Brunei" title="Brunei" />
+  <Area name="Bhutan" title="Bhutan" />
+  <Area name="Bangladesh" title="Bangladesh" />
+  <Area name="Azerbaijan" title="Azerbaijan" />
+  <Area name="Armenia" title="Armenia" />
+  <Area name="Afghanistan" title="Afghanistan" />
+</Atlas>

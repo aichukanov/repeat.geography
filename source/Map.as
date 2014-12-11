@@ -20,6 +20,7 @@
 		private var mapLoader:MapLoader = new MapLoader();
 		private var atlas:Object = {};
 		
+		private var langObj:Object = {};
 		
 		function Map() {
 			super();
@@ -58,11 +59,11 @@
 			this.dispose();
 		}
 		
-		public function loadMap(curLvl:Array, curArea:String):void {
+		public function loadMap(curLvl:Array, curArea:String, lang:String = "en"):void {
 			try {
 				var fullNameArea:String = getAddress(curLvl,curArea);
 					
-				mapLoader.loadMap(fullNameArea);
+				mapLoader.loadMap(fullNameArea,lang);
 				
 				mapLoader.addEventListener(MapEvent.MAP_LOAD_SUCCESS,onMapLoaded);
 				mapLoader.addEventListener(MapEvent.MAP_LOAD_ERROR,onMapLoadError);
@@ -74,10 +75,11 @@
 			function onMapLoaded(evt:MapEvent):void {
 				try {
 					atlas = evt.atlas;
+					langObj = evt.langObj;
 					addAtlas(atlas, evt.bmp, evt.bmpXML);	
 					//startQuiz(evt.atlas);
 					//dispatchEvent(new Event(MapEvent.MAP_LOAD_SUCCESS));
-					dispatchEventWith(MapEvent.MAP_LOAD_SUCCESS,false,{atlas: evt.atlas});
+					dispatchEventWith(MapEvent.MAP_LOAD_SUCCESS,false,{atlas: evt.atlas, langObj: evt.langObj});
 				}
 				catch (e:Error) {
 					trace("Map loadMap onMapLoaded()",e.message);
@@ -113,8 +115,10 @@
 							// сюда локализации прикрутить
 							// atlasObj заменить на langObj
 							//var cName:String = atlasObj[i]["name_" + lang]; 
-							var cName:String = i;
-							area.areaName = cName ? cName : atlasObj[i].name_en;
+							//var cName:String = i;
+							var cName:String = langObj[i].transName; 
+							area.areaName = cName ? cName : i;
+							//area.areaName = cName ? cName : atlasObj[i].name_en;
 							
 							//countryImage.color = Math.random() * 0xFFFFFF;
 							

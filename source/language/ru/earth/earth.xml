@@ -1,0 +1,8 @@
+<Atlas lang="ru">
+  <Area name="Africa" title="Африка" />
+  <Area name="Australia" title="Австралия" />
+  <Area name="Asia" title="Азия" />
+  <Area name="Europe" title="Европа" />
+  <Area name="NorthAmerica" title="Северная Америка" />
+  <Area name="SouthAmerica" title="Южная Америка" />
+</Atlas>

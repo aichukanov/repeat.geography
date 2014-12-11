@@ -135,6 +135,44 @@
 				}
 			}
 		}
+		
+		public function loadLangXML(str:String,lang:String):void {
+			try {
+				var loader:URLLoader	= new URLLoader();	
+				var req:URLRequest		= new URLRequest(("language/" + lang + "/" + str + ".xml").toLowerCase());
+				loader.load(req);
+				loader.addEventListener(Event.COMPLETE,loadLangXMLHandler);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, loadLangXMLIOErrorHandler);
+			}
+			catch (e:Error) {
+				trace("GeoLoader loadLangXML()",e.message);
+			}
+			
+			function loadLangXMLHandler(evt:Event):void {
+				try {
+					loader.removeEventListener(Event.COMPLETE,loadLangXMLHandler);
+					loader.removeEventListener(IOErrorEvent.IO_ERROR, loadLangXMLIOErrorHandler);
+					
+					dispatchEvent(new XMLEvent(XMLEvent.XML_LOAD_SUCCESS, XML(loader.data)));
+				}
+				catch (e:Error) {
+					trace("GeoLoader loadLanguageXMLHandler()",e.message);
+				}
+			}
+			
+			function loadLangXMLIOErrorHandler(evt:IOErrorEvent):void {
+				try {
+					loader.removeEventListener(Event.COMPLETE,loadLangXMLHandler);
+					loader.removeEventListener(IOErrorEvent.IO_ERROR, loadLangXMLIOErrorHandler);	
+					
+					trace("GeoLoader loadLanguageXMLIOErrorHandler()",evt.text);		
+					dispatchEvent(new XMLEvent(XMLEvent.XML_LOAD_ERROR));
+				}
+				catch (e:Error) {
+					trace("GeoLoader loadLanguageXMLIOErrorHandler()",e.message,evt.text);
+				}
+			}
+		}
 	}
 	
 }

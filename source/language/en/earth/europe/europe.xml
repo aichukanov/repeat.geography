@@ -1,0 +1,43 @@
+<Atlas lang="en">
+  <Area name="Albania" title="Albania" />
+  <Area name="Austria" title="Austria" />
+  <Area name="Belarus" title="Belarus" />
+  <Area name="Belgium" title="Belgium" />
+  <Area name="BosniaAndHerzegovina" title="Bosnia and Herzegovina" />
+  <Area name="Bulgaria" title="Bulgaria" />
+  <Area name="Croatia" title="Croatia" />
+  <Area name="Cyprus" title="Cyprus" />
+  <Area name="Czech" title="Czech" />
+  <Area name="Denmark" title="Denmark" />
+  <Area name="Estonia" title="Estonia" />
+  <Area name="Finland" title="Finland" />
+  <Area name="France" title="France" />
+  <Area name="Germany" title="Germany" />
+  <Area name="GreatBritain" title="Great Britain" />
+  <Area name="Greece" title="Greece" />
+  <Area name="Hungary" title="Hungary" />
+  <Area name="Iceland" title="Iceland" />
+  <Area name="Ireland" title="Ireland" />
+  <Area name="Italy" title="Italy" />
+  <Area name="Kosovo" title="Kosovo" />
+  <Area name="Latvia" title="Latvia" />
+  <Area name="Litva" title="Litva" />
+  <Area name="Luxembourg" title="Luxembourg" />
+  <Area name="Macedonia" title="Macedonia" />
+  <Area name="Moldavia" title="Moldavia" />
+  <Area name="Montenegro" title="Montenegro" />
+  <Area name="Netherlands" title="Netherlands" />
+  <Area name="Norway" title="Norway" />
+  <Area name="Poland" title="Poland" />
+  <Area name="Portugal" title="Portugal" />
+  <Area name="Romania" title="Romania" />
+  <Area name="Russia" title="Russia" />
+  <Area name="Serbia" title="Serbia" />
+  <Area name="Slovakia" title="Slovakia" />
+  <Area name="Slovenia" title="Slovenia" />
+  <Area name="Spain" title="Spain" />
+  <Area name="Sweden" title="Sweden" />
+  <Area name="Switzerland" title="Switzerland" />
+  <Area name="Turkey" title="Turkey" />
+  <Area name="Ukraine" title="Ukraine" />
+</Atlas>

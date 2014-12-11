@@ -14,8 +14,10 @@
 		private var geoLoader:GeoLoader = new GeoLoader();
 		
 		private var nameArea:String = "";
+		private var lang:String = "en";
 		
 		private var atlas:Object;
+		private var langObj:Object;
 		private var bmp:Bitmap;
 		private var bmpXML:XML;
 		
@@ -23,9 +25,10 @@
 			// constructor code
 		}
 		
-		public function loadMap(fullNameArea:String):void {
+		public function loadMap(fullNameArea:String,language:String):void {
 			try {
 				nameArea = fullNameArea;
+				lang = language;
 				
 				geoLoader.loadAtlas(fullNameArea);
 				geoLoader.addEventListener(XMLEvent.XML_LOAD_SUCCESS,onLoadAtlas);
@@ -68,13 +71,39 @@
 				
 				bmpXML = evt.data;
 				
-				geoLoader.loadMapPNG(nameArea);
-				geoLoader.addEventListener(ImageEvent.IMAGE_LOAD_SUCCESS,onLoadMapPNG);
-				geoLoader.addEventListener(ImageEvent.IMAGE_LOAD_ERROR,onLoadMapPNGError);
+				//geoLoader.loadMapPNG(nameArea);
+				//geoLoader.addEventListener(ImageEvent.IMAGE_LOAD_SUCCESS,onLoadMapPNG);
+				//geoLoader.addEventListener(ImageEvent.IMAGE_LOAD_ERROR,onLoadMapPNGError);
+				
+				geoLoader.loadLangXML(nameArea,lang);
+				geoLoader.addEventListener(XMLEvent.XML_LOAD_SUCCESS,onLoadLangXML);
+				geoLoader.addEventListener(XMLEvent.XML_LOAD_ERROR,onLoadLangXMLError);
 			}
 			catch (e:Error) {
 				trace("MapLoader onLoadMapXML()",e.message);
 			}
+		}
+		
+		private function onLoadLangXML(evt:XMLEvent):void {
+			geoLoader.removeEventListener(XMLEvent.XML_LOAD_SUCCESS,onLoadLangXML);
+			geoLoader.removeEventListener(XMLEvent.XML_LOAD_ERROR,onLoadLangXMLError);
+			trace("lang xml loaded");
+			
+			langObj = {};
+			
+			var langXML:XML = evt.data;
+			var lng:uint = langXML.children().length();
+			
+			for (var i:uint = 0; i < lng; i++) {
+				langObj[langXML.children()[i].attribute("name")] = {
+					areaName:	langXML.children()[i].attribute("name"),
+					transName:	langXML.children()[i].attribute("title")  // translated name
+				}
+			}
+				
+			geoLoader.loadMapPNG(nameArea);
+			geoLoader.addEventListener(ImageEvent.IMAGE_LOAD_SUCCESS,onLoadMapPNG);
+			geoLoader.addEventListener(ImageEvent.IMAGE_LOAD_ERROR,onLoadMapPNGError);
 		}
 		
 		private function onLoadMapPNG(evt:ImageEvent):void {
@@ -84,7 +113,7 @@
 				
 				bmp = evt.data;
 				
-				dispatchEvent(new MapEvent(MapEvent.MAP_LOAD_SUCCESS, atlas, bmp, bmpXML));
+				dispatchEvent(new MapEvent(MapEvent.MAP_LOAD_SUCCESS, atlas, bmp, bmpXML, langObj));
 			}
 			catch (e:Error) {
 				trace("MapLoader onLoadMapPNG()",e.message);
@@ -117,6 +146,14 @@
 			}
 		}
 		
+		private function onLoadLangXMLError(evt:XMLEvent):void {
+			geoLoader.removeEventListener(XMLEvent.XML_LOAD_SUCCESS,onLoadLangXML);
+			geoLoader.removeEventListener(XMLEvent.XML_LOAD_ERROR,onLoadLangXMLError);
+			
+			trace("MapLoader onLoadLangXMLError()");
+			dispatchEvent(new MapEvent(MapEvent.MAP_LOAD_ERROR));
+		}
+		
 		private function onLoadMapPNGError(evt:ImageEvent):void {
 			try {
 				geoLoader.removeEventListener(ImageEvent.IMAGE_LOAD_SUCCESS,onLoadMapPNG);
@@ -128,6 +165,6 @@
 			catch (e:Error) {
 				trace("MapLoader onLoadMapPNGError()",e.message);
 			}
-		}		
+		}	
 	}
 }

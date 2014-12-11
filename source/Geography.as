@@ -17,7 +17,7 @@
 	
 		private var map:Map;
 		
-		private var lang:String = "en";
+		private var lang:String = "ru";
 		
 		private var question:Question; 
 		private var qh:Number = 40; // questionMC height
@@ -133,7 +133,7 @@
 				
 				map = new Map();
 				
-				map.loadMap(curLvl,curArea);
+				map.loadMap(curLvl,curArea,lang);
 				map.addEventListener(MapEvent.MAP_LOAD_SUCCESS,onMapLoadSuccess);
 				map.addEventListener(MapEvent.MAP_LOAD_ERROR,onMapLoadError);
 			}
@@ -161,7 +161,8 @@
 					
 					addGameMenu();
 					
-					quizObj = evt.data.atlas;
+					//quizObj = evt.data.atlas;
+					quizObj = evt.data.langObj;
 					setListenersMap(quizObj);
 					//startQuiz(evt.data.atlas);
 				}
@@ -216,7 +217,8 @@
 				var areaArr:Array = new Array;
 				
 				for (var i:String in obj) {
-					areaArr.push(i);
+					//areaArr.push(i);
+					areaArr.push(obj[i].areaName);
 				}
 				
 				quizStarted = true;
@@ -234,7 +236,7 @@
 				removeChild(question);
 				question = null;
 				
-				question = new Question("Where is " + aName + "?", stage.stageWidth, qh);
+				question = new Question("Where is " + quizObj[aName].transName + "?", stage.stageWidth, qh);
 				addChild(question);
 				swapChildren(question,bottomLine);
 			}
@@ -263,7 +265,7 @@
 				var a:Area;
 				for (var i:String in obj) {
 					//try {
-						a = map.getChildByName(i) as Area;
+						a = map.getChildByName(obj[i].areaName) as Area;
 						a ? a.addEventListener(Area.AREA_SELECTED, onSelectArea) : null;
 					//}catch (e:Error) { trace("Geography setListenersMap() for i",i,e.message); }
 				}
