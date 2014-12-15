@@ -50,7 +50,7 @@
 			bg = new Quad(qWidth,qHeight,bgColor);
 			bg.x = 0;
 			bg.y = 0;
-			this.addChild(bg);
+			//this.addChild(bg);
 		}
 		
 		private function makeTF():void {
@@ -63,7 +63,7 @@
 			tf.x = bg.x;
 			tf.y = bg.y;
 							
-			this.addChild(bg);
+			//this.addChild(bg);
 			this.addChild(tf);
 			
 			tf.autoScale = true;

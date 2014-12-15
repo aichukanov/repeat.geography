@@ -11,6 +11,7 @@
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
 	import starling.display.Image;
+	import starling.display.Button;
 	
 	public class Geography extends Sprite 
 	{	
@@ -35,6 +36,7 @@
 		private var curArea:String = topLevelMap;
 		
 		private var quiz:Quiz;
+		private var quizRes:QuizRes;
 		public var quizStarted:Boolean	= false;
 		public var quizPause:Boolean 	= false;
 		
@@ -55,7 +57,7 @@
 				removeEventListener(Event.ADDED_TO_STAGE, init);
 				
 				addBottomLine();
-				//addGameMenu();
+				addGameMenu();
 				makePreLoader();
 				addMap();
 			}
@@ -79,14 +81,17 @@
 		
 		private function addGameMenu():void {
 			try {
-				addChild(gameMenu);
-				gameMenu.startBtn.addEventListener(TouchEvent.TOUCH, onStartTouch);
-				gameMenu.upBtn.addEventListener(TouchEvent.TOUCH, onUpTouch);
-				
-				gameMenu.enBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
-				gameMenu.ruBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
-				//gameMenu.x = stage.width  / 2 - gameMenu.width  / 2;
-				//gameMenu.y = stage.height / 2 - gameMenu.height / 2;
+				if (!contains(gameMenu)) {
+					addChild(gameMenu);
+					gameMenu.startBtn.addEventListener(TouchEvent.TOUCH, onStartTouch);
+					gameMenu.stopBtn.addEventListener(TouchEvent.TOUCH, onStopTouch);
+					gameMenu.upBtn.addEventListener(TouchEvent.TOUCH, onUpTouch);
+					
+					gameMenu.enBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
+					gameMenu.ruBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
+					//gameMenu.x = stage.width  / 2 - gameMenu.width  / 2;
+					//gameMenu.y = stage.height / 2 - gameMenu.height / 2;
+				}
 			}
 			catch (e:Error) {
 				trace("Geography addGameMenu()",e.message);
@@ -94,18 +99,25 @@
 		}
 		
 		private function switchLanguage(evt:TouchEvent):void {
-			var t:Touch = evt.touches[0];
-			
-			if (t.phase == TouchPhase.ENDED) {
-				lang = (evt.currentTarget as Image).name;
-				addMap();
+			try {
+				var t:Touch = evt.touches[0];
+				
+				if (!quizStarted) {
+					if (t.phase == TouchPhase.ENDED) {
+						lang = (evt.currentTarget as Button).name;
+						addMap();
+					}
+				}
+			}
+			catch (e:Error) {
+				trace("Geography switchLanguage()",e.message);
 			}
 		}
 		
 		private function removeGameMenu():void {
 			try {
 				removeChild(gameMenu);
-				gameMenu.startBtn.removeEventListener(TouchEvent.TOUCH, onStartTouch);
+				gameMenu.dispose();
 			}
 			catch (e:Error) {
 				trace("Geography removeGameMenu()",e.message);
@@ -115,12 +127,31 @@
 		private function onStartTouch(evt:TouchEvent):void {
 			try {
 				var t:Touch = evt.touches[0];
-				if (t.phase == TouchPhase.ENDED) {
-					
-					removeGameMenu();
-					startQuiz(quizObj);
-					//makePreLoader();
-					//addMap();
+								
+				if (!quizStarted) {
+					if (t.phase == TouchPhase.ENDED) {
+						startQuiz(quizObj);
+					}
+				}
+				else {
+					trace("quiz already started");
+				}
+			}
+			catch (e:Error) {
+				trace("Geography onStartTouch()",e.message);
+			}
+		}
+		
+		private function onStopTouch(evt:TouchEvent):void {
+			try {
+				if (quizStarted) {
+					var t:Touch = evt.touches[0];
+					if (t.phase == TouchPhase.ENDED) {
+						onQuizFinish();
+					}
+				}
+				else {
+					trace("You should start Quiz before stop");
 				}
 			}
 			catch (e:Error) {
@@ -131,8 +162,13 @@
 		private function onUpTouch(evt:TouchEvent):void {
 			try {
 				var t:Touch = evt.touches[0];
-				if (t.phase == TouchPhase.ENDED) {
-					goUpMap();
+				if (!quizStarted) {
+					if (t.phase == TouchPhase.ENDED) {
+						goUpMap();
+					}
+				}
+				else {
+					trace("quiz already started");
 				}
 			}
 			catch (e:Error) {
@@ -178,12 +214,16 @@
 					map.y = qh - margin;
 					map.x = (stage.stageWidth - map.width) / 2;
 					
-					addGameMenu();
+					//addGameMenu();
 					
 					//quizObj = evt.data.atlas;
 					quizObj = evt.data.langObj;
 					setListenersMap(quizObj);
+					
 					//startQuiz(evt.data.atlas);
+					//if (quizStarted) {
+						//addNewQuestion(quiz.areaName);
+					//}
 				}
 				catch (e:Error) {
 					//bottomLine.tf.text = "onMapLoadSucces()" + e.message;
@@ -239,8 +279,15 @@
 					//areaArr.push(i);
 					areaArr.push(obj[i].areaName);
 				}
+				gameMenu.quizOn();
 				
 				quizStarted = true;
+				
+				quizRes = new QuizRes();
+				quizRes.countFull = areaArr.length;
+				addChild(quizRes);
+				quizRes.x = stage.stageWidth - quizRes.width;
+				
 				quiz = new Quiz(areaArr);
 				
 				quiz.addEventListener(Quiz.QUIZ_FINISH,onQuizFinish);
@@ -252,27 +299,48 @@
 		private function onNextQuestion(evt:Event):void {
 			try {
 				var aName:String = evt.data.areaName; // area name
-				removeChild(question);
-				question = null;
-				
-				question = new Question(otherTextObj["question_" + lang] + quizObj[aName].transName + "?", stage.stageWidth, qh);
-				addChild(question);
-				swapChildren(question,bottomLine);
+				addNewQuestion(aName);
 			}
 			catch (e:Error) {
 				trace("Geography onNextQuestion()",e.message);
 			}
 		}
 		
-		private function onQuizFinish(evt:Event):void {
+		private function addNewQuestion(aName:String):void {
+			removeChild(question);
+			question = null;
+			
+			// если оставлять спрайт с языками, то нужно сравнение, чтобы ровно по центру.
+			//var leftMargin:Number 	= gameMenu.stopBtn.width > gameMenu.langSprite.width 
+									//? gameMenu.stopBtn.width : gameMenu.langSprite.width;
+			// если языки прячем, то только двойная stopBtn
+			var leftMargin:Number 	= gameMenu.stopBtn.width;
+									
+			var qw:Number = stage.stageWidth - leftMargin * 2; 
+			question = new Question(otherTextObj["question_" + lang] + quizObj[aName].transName + "?", qw, qh);
+			
+			addChild(question);
+			question.x = stage.stageWidth / 2 - question.width / 2;
+			//swapChildren(question,bottomLine);
+			swapChildren(question,gameMenu);
+		}
+		
+		private function onQuizFinish(evt:Event = null):void {
 			try {
+				//quiz.dispose();
 				removeChild(question);
+				question.dispose();
 				question = null;
+				
+				removeChild(quizRes);
+				quizRes.dispose();
+				quizRes = null;
 				
 				quizStarted = false;
 				
 				map.setAreaDef();
-				addGameMenu();
+				//addGameMenu();
+				gameMenu.quizOff();
 			}
 			catch (e:Error) {
 				trace("Geography onQuizFinish()",e.message);
@@ -298,6 +366,11 @@
 					if (!quizPause) {
 						var areaRight:Area = map.getChildByName(quiz.areaName) as Area;
 						var isWrong:Boolean = map.onResponse(area,areaRight);
+						
+						if (!isWrong) {
+							quizRes.countCorrect++;
+							quizRes.setResTF();
+						}
 						
 						quizPause = true;
 						map.addEventListener(Map.RESPONSE_END,onResponseEnd);

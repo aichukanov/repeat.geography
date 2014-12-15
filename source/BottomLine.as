@@ -16,6 +16,9 @@
 		[Embed(source = "/Media/fonts/Roboto-Italic.ttf", embedAsCFF = "false", fontName = "RobotoItalic")]
 		private static const RobotoItalic:Class;
 		
+		[Embed(source = "/Media/fonts/Roboto-Light.ttf", embedAsCFF = "false", fontName = "RobotoLight")]
+		private static const RobotoLight:Class;
+		
 		public var tf:TextField;
 		
 		private var logo:Logo = new Logo();
@@ -66,6 +69,6 @@
 			this.addChild(tf);
 			
 			tf.autoScale = true;
-		}
+		}		
 	}
 }
