@@ -15,6 +15,8 @@
 	import starling.text.TextFieldAutoSize;
 	import starling.utils.VAlign;
 	import starling.utils.HAlign;
+	import flash.utils.setInterval;
+	import flash.utils.clearInterval;
 	
 	public class QuizRes extends Sprite {
 		[Embed(source = "/Media/fonts/Roboto-Italic.ttf", embedAsCFF = "false", fontName = "RobotoItalic")]
@@ -31,12 +33,14 @@
 		private var resTF:TextField;		
 		private var timerTF:TextField;
 		
-		private var timerText:String = "01:59";
-		private var resText:String = "2 / 10";
+		private var timerText:String = "";
+		private var resText:String = "";
 		
-		public var timerValue:uint = 120;
+		public var timerValue:uint = 70;
 		public var countCorrect:uint = 0;
 		public var countFull:uint = 0;
+		
+		private var timerInt:uint = 0;
 		
 		function QuizRes() {
 			super();
@@ -66,8 +70,26 @@
 			}
 		}
 		
+		public function startTimer():void {
+			timerInt = setInterval(function () {
+										timerValue--;
+										setTimerTF();
+									},1000);
+		}
+		
+		public function stopTimer():void {
+			clearInterval(timerInt);
+		}
+		
 		public function setTimerTF():void {
-			timerTF.text = timerText;
+			var countMin:int = Math.floor(timerValue / 60);
+			var countSec:int  = timerValue % 60;
+			timerTF.text = addZero(countMin) + ":" + addZero(countSec);
+		}
+		
+		private function addZero(num:uint):String {
+			var str:String = num > 9 ? num.toString() : "0" + num.toString();
+			return str;
 		}
 		
 		public function setResTF():void {

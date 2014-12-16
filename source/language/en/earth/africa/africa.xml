@@ -1,0 +1,51 @@
+<Atlas lang="en">
+  <Area name="Algeria" title="Algeria" />
+  <Area name="Angola" title="Angola" />
+  <Area name="Benin" title="Benin" />
+  <Area name="Botswana" title="Botswana" />
+  <Area name="BurkinaFaso" title="Burkina Faso" />
+  <Area name="Burundi" title="Burundi" />
+  <Area name="Cameroon" title="Cameroon" />
+  <Area name="CentralAfricanRepublic" title="Central African Republic" />
+  <Area name="Chad" title="Chad" />
+  <Area name="DemocraticRepublicOfTheCongo" title="Democratic Republic Of The Congo" />
+  <Area name="Djibouti" title="Djibouti" />
+  <Area name="Egypt" title="Egypt" />
+  <Area name="EquatorialGuinea" title="Equatorial Guinea" />
+  <Area name="Eritrea" title="Eritrea" />
+  <Area name="Ethiopia" title="Ethiopia" />
+  <Area name="Gabon" title="Gabon" />
+  <Area name="Gambia" title="Gambia" />
+  <Area name="Ghana" title="Ghana" />
+  <Area name="Guinea" title="Guinea" />
+  <Area name="GuineaBissau" title="Guinea-Bissau" />
+  <Area name="IvoryCoast" title="Ivory Coast" />
+  <Area name="Kenya" title="Kenya" />
+  <Area name="Lesotho" title="Lesotho" />
+  <Area name="Liberia" title="Liberia" />
+  <Area name="Libya" title="Libya" />
+  <Area name="Madagaskar" title="Madagaskar" />
+  <Area name="Malawi" title="Malawi" />
+  <Area name="Mali" title="Mali" />
+  <Area name="Mauritania" title="Mauritania" />
+  <Area name="Morocco" title="Morocco" />
+  <Area name="Mozambique" title="Mozambique" />
+  <Area name="Namibia" title="Namibia" />
+  <Area name="Niger" title="Niger" />
+  <Area name="Nigeria" title="Nigeria" />
+  <Area name="RepublicOfTheCongo" title="Republic Of The Congo" />
+  <Area name="Rwanda" title="Rwanda" />
+  <Area name="Senegal" title="Senegal" />
+  <Area name="SierraLeone" title="Sierra Leone" />
+  <Area name="Somalia" title="Somalia" />
+  <Area name="SouthAfrica" title="South Africa" />
+  <Area name="Sudan" title="Sudan" />
+  <Area name="Swaziland" title="Swaziland" />
+  <Area name="Tanzania" title="Tanzania" />
+  <Area name="Togo" title="Togo" />
+  <Area name="Tunisia" title="Tunisia" />
+  <Area name="Uganda" title="Uganda" />
+  <Area name="WesternSahara" title="Western Sahara" />
+  <Area name="Zambia" title="Zambia" />
+  <Area name="Zimbabwe" title="Zimbabwe" />
+</Atlas>

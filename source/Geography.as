@@ -286,6 +286,7 @@
 				quizRes = new QuizRes();
 				quizRes.countFull = areaArr.length;
 				addChild(quizRes);
+				quizRes.startTimer();
 				quizRes.x = stage.stageWidth - quizRes.width;
 				
 				quiz = new Quiz(areaArr);
@@ -332,10 +333,16 @@
 				question.dispose();
 				question = null;
 				
+				quizRes.stopTimer();
+				quizRes.scaleX = 5;
+				quizRes.scaleY = 5;
+				quizRes.x = 100;
+				quizRes.y = 100;
+				/*
 				removeChild(quizRes);
 				quizRes.dispose();
 				quizRes = null;
-				
+				*/
 				quizStarted = false;
 				
 				map.setAreaDef();

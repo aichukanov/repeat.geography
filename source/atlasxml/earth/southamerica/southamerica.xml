@@ -1,0 +1,15 @@
+<Atlas name="SouthAmerica">
+  <Area name="Argentina" x="186" y="329"/>
+  <Area name="Bolivia" x="169" y="212"/>
+  <Area name="Brazil" x="130" y="71"/>
+  <Area name="Chile" x="168" y="288"/>
+  <Area name="Colombia" x="85" y="3"/>
+  <Area name="Ecuador" x="68" y="108"/>
+  <Area name="FrenchGuiana" x="290" y="67"/>
+  <Area name="Guyana" x="235" y="41"/>
+  <Area name="Paraguay" x="235" y="303"/>
+  <Area name="Peru" x="65" y="120"/>
+  <Area name="Suriname" x="262" y="63"/>
+  <Area name="Uruguay" x="286" y="408"/>
+  <Area name="Venezuela" x="136" y="8"/>
+</Atlas>
