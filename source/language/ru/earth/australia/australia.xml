@@ -1,0 +1,12 @@
+<Atlas lang="en">
+  <Area name="Australia" title="Австралия" />
+  <Area name="Fiji" title="Фиджи" />
+  <Area name="Kiribati" title="Кирибати" />
+  <Area name="MarshalIslands" title="Маршалловы Острова" />
+  <Area name="NewCaledonia" title="Новая Каледония (Франция)" />
+  <Area name="NewZeland" title="Новая Зеландия" />
+  <Area name="PapuaNewGuinea" title="Папуа - Новая Гвинея" />
+  <Area name="SolomonIslands" title="Соломоновы острова" />
+  <Area name="Tuvalu" title="Тувалу" />
+  <Area name="Vanuatu" title="Вануату" />
+</Atlas>

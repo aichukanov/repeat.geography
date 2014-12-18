@@ -1,17 +1,17 @@
-<Atlas lang="en">
-  <Area name="Belize" title="Belize" />
-  <Area name="Canada" title="Canada" />
-  <Area name="CostaRica" title="Costa Rica" />
-  <Area name="Cuba" title="Cuba" />
-  <Area name="DominicanRepublic" title="Dominican Republic" />
-  <Area name="ElSalvador" title="El Salvador" />
-  <Area name="Greenland" title="Greenland (Denmark)" />
-  <Area name="Guatemala" title="Guatemala" />
-  <Area name="Haiti" title="Haiti" />
-  <Area name="Honduras" title="Honduras" />
-  <Area name="Mexico" title="Mexico" />
-  <Area name="Nicaragua" title="Nicaragua" />
-  <Area name="Panama" title="Panama" />
-  <Area name="PuertoRico" title="Puerto Rico (U.S.)" />
+<Atlas lang="ru">
+  <Area name="Belize" title="Белиз" />
+  <Area name="Canada" title="Канада" />
+  <Area name="CostaRica" title="Коста-Рика" />
+  <Area name="Cuba" title="Куба" />
+  <Area name="DominicanRepublic" title="Доминикана" />
+  <Area name="ElSalvador" title="Сальвадор" />
+  <Area name="Greenland" title="Гренландия (Дания)" />
+  <Area name="Guatemala" title="Гватемала" />
+  <Area name="Haiti" title="Гаити" />
+  <Area name="Honduras" title="Гондурас" />
+  <Area name="Mexico" title="Мексика" />
+  <Area name="Nicaragua" title="Никарагуа" />
+  <Area name="Panama" title="Панама" />
+  <Area name="PuertoRico" title="Пуэрто-Рико (США)" />
   <Area name="USA" title="USA" />
 </Atlas>

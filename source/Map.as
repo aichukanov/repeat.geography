@@ -11,16 +11,16 @@
 	import starling.textures.TextureAtlas;
 	import starling.textures.Texture;
 	import flash.utils.setTimeout;
-	 
+	
 	public class Map extends Sprite {
 		public static const RESPONSE_END:String = "responseEnd";
 		
 		public var toQuestions:uint = 0; // timeout between questions
 		
 		private var mapLoader:MapLoader = new MapLoader();
-		private var atlas:Object = {};
+		private var atlas:Object 	= {};
 		
-		private var langObj:Object = {};
+		private var langObj:Object 	= {};
 		
 		function Map() {
 			super();

@@ -1,0 +1,53 @@
+<Atlas lang="ru">
+	<Area name="Alabama" title="Алабама" />
+	<Area name="Alaska" title="Аляска" />
+	<Area name="Arcansas" title="Арканзас" />
+	<Area name="Arizona" title="Аризона" />
+	<Area name="California" title="Калифорния" />
+	<Area name="Colorado" title="Колорадо" />
+	<Area name="Connecticut" title="Коннектикут" />
+	<Area name="DC" title="Вашингтон (округ Колумбия)" />
+	<Area name="Delaware" title="Делавер" />
+	<Area name="Florida" title="Флорида" />
+	<Area name="Georgia" title="Джорджия" />
+	<Area name="Hawaii" title="Гавайи" />
+	<Area name="Idaho" title="Айдахо" />
+	<Area name="Illinois" title="Иллинойс" />
+	<Area name="Indiana" title="Индиана" />
+	<Area name="Iowa" title="Айова" />
+	<Area name="Kansas" title="Канзас" />
+	<Area name="Kentucky" title="Кентукки" />
+	<Area name="Louisiana" title="Луизиана" />
+	<Area name="Maine" title="Мэн" />
+	<Area name="Maryland" title="Мэрилэнд" />
+	<Area name="Massachusetts" title="Массачусетс" />
+	<Area name="Michigan" title="Мичиган" />
+	<Area name="Minnesota" title="Миннесота" />
+	<Area name="Mississippi" title="Миссисипи" />
+	<Area name="Missouri" title="Миссури" />
+	<Area name="Montana" title="Монтана" />
+	<Area name="Nebraska" title="Небраска" />
+	<Area name="Nevada" title="Невада" />
+	<Area name="NewHampshire" title="Нью-Гемпшир" />
+	<Area name="NewJersey" title="Нью-Джерси" />
+	<Area name="NewMexico" title="Нью-Мексико" />
+	<Area name="NewYork" title="Нью-Йорк" />
+	<Area name="NorthCarolina" title="Северная Каролина" />
+	<Area name="NorthDakota" title="Северная Дакота" />
+	<Area name="Ohio" title="Огайо" />
+	<Area name="Oklahoma" title="Оклахома" />
+	<Area name="Oregon" title="Орегон" />
+	<Area name="Pennsylvania" title="Пенсильвания" />
+	<Area name="RhodeIsland" title="Род-Айленд" />
+	<Area name="SouthCarolina" title="Южная Каролина" />
+	<Area name="SouthDakota" title="Южная Дакота" />
+	<Area name="Tennessee" title="Теннесси" />
+	<Area name="Texas" title="Техас" />
+	<Area name="Utah" title="Юта" />
+	<Area name="Vermont" title="Вермонт" />
+	<Area name="Virginia" title="Вирджиния" />
+	<Area name="Washington" title="Вашингтон" />
+	<Area name="WestVirginia" title="Западная Вирджиния" />
+	<Area name="Wisconsin" title="Висконсин" />
+	<Area name="Wyoming" title="Вайоминг" />
+</Atlas>

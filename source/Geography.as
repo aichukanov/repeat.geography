@@ -26,17 +26,15 @@
 		private const bh:Number 	= 40; // bottom line height
 		private const margin:Number = 10; // margin top and bottom
 	
+		private var lang:String		= "en";
+		private var curLvl:Array	= []; //["earth","europe"]
+		private var curArea:String	= topLevelMap;
+		
 		private var map:Map;
-		
-		private var lang:String = "en";
-		
-		private var question:Question; 
-		
-		private var curLvl:Array = []; //["earth","europe"]
-		private var curArea:String = topLevelMap;
-		
+		private var question:Question;
 		private var quiz:Quiz;
 		private var quizRes:QuizRes;
+		
 		public var quizStarted:Boolean	= false;
 		public var quizPause:Boolean 	= false;
 		
@@ -334,15 +332,15 @@
 				question = null;
 				
 				quizRes.stopTimer();
-				quizRes.scaleX = 5;
-				quizRes.scaleY = 5;
-				quizRes.x = 100;
-				quizRes.y = 100;
-				/*
+				//quizRes.scaleX = 5;
+				//quizRes.scaleY = 5;
+				//quizRes.x = 100;
+				//quizRes.y = 100;
+				
 				removeChild(quizRes);
 				quizRes.dispose();
 				quizRes = null;
-				*/
+				
 				quizStarted = false;
 				
 				map.setAreaDef();

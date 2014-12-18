@@ -1,0 +1,53 @@
+<Atlas lang="en">
+	<Area name="Alabama" title="Alabama" />
+	<Area name="Alaska" title="Alaska" />
+	<Area name="Arcansas" title="Arcansas" />
+	<Area name="Arizona" title="Arizona" />
+	<Area name="California" title="California" />
+	<Area name="Colorado" title="Colorado" />
+	<Area name="Connecticut" title="Connecticut" />
+	<Area name="DC" title="Washington, District of Columbia" />
+	<Area name="Delaware" title="Delaware" />
+	<Area name="Florida" title="Florida" />
+	<Area name="Georgia" title="Georgia" />
+	<Area name="Hawaii" title="Hawaii" />
+	<Area name="Idaho" title="Idaho" />
+	<Area name="Illinois" title="Illinois" />
+	<Area name="Indiana" title="Indiana" />
+	<Area name="Iowa" title="Iowa" />
+	<Area name="Kansas" title="Kansas" />
+	<Area name="Kentucky" title="Kentucky" />
+	<Area name="Louisiana" title="Louisiana" />
+	<Area name="Maine" title="Maine" />
+	<Area name="Maryland" title="Maryland" />
+	<Area name="Massachusetts" title="Massachusetts" />
+	<Area name="Michigan" title="Michigan" />
+	<Area name="Minnesota" title="Minnesota" />
+	<Area name="Mississippi" title="Mississippi" />
+	<Area name="Missouri" title="Missouri" />
+	<Area name="Montana" title="Montana" />
+	<Area name="Nebraska" title="Nebraska" />
+	<Area name="Nevada" title="Nevada" />
+	<Area name="NewHampshire" title="New Hampshire" />
+	<Area name="NewJersey" title="New Jersey" />
+	<Area name="NewMexico" title="New Mexico" />
+	<Area name="NewYork" title="New York" />
+	<Area name="NorthCarolina" title="North Carolina" />
+	<Area name="NorthDakota" title="North Dakota" />
+	<Area name="Ohio" title="Ohio" />
+	<Area name="Oklahoma" title="Oklahoma" />
+	<Area name="Oregon" title="Oregon" />
+	<Area name="Pennsylvania" title="Pennsylvania" />
+	<Area name="RhodeIsland" title="Rhode Island" />
+	<Area name="SouthCarolina" title="South Carolina" />
+	<Area name="SouthDakota" title="South Dakota" />
+	<Area name="Tennessee" title="Tennessee" />
+	<Area name="Texas" title="Texas" />
+	<Area name="Utah" title="Utah" />
+	<Area name="Vermont" title="Vermont" />
+	<Area name="Virginia" title="Virginia" />
+	<Area name="Washington" title="Washington" />
+	<Area name="WestVirginia" title="West Virginia" />
+	<Area name="Wisconsin" title="Wisconsin" />
+	<Area name="Wyoming" title="Wyoming" />
+</Atlas>

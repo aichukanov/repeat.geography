@@ -1,0 +1,15 @@
+<Atlas lang="ru">
+  <Area name="Argentina" title="Аргентина" />
+  <Area name="Bolivia" title="Боливия" />
+  <Area name="Brazil" title="Бразилия" />
+  <Area name="Chile" title="Чили" />
+  <Area name="Colombia" title="Колумбия" />
+  <Area name="Ecuador" title="Эквадор" />
+  <Area name="FrenchGuiana" title="Французская Гвиана" />
+  <Area name="Guyana" title="Гайана" />
+  <Area name="Paraguay" title="Парагвай" />
+  <Area name="Peru" title="Перу" />
+  <Area name="Suriname" title="Суринам" />
+  <Area name="Uruguay" title="Уругвай" />
+  <Area name="Venezuela" title="Венесуэла" />
+</Atlas>

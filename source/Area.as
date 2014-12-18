@@ -5,7 +5,7 @@
 	 * @author aichukanov
 	 */
 	
-	import starling.display.DisplayObject;
+	import flash.display.DisplayObject;
 	import starling.textures.Texture;
 	
 	import starling.events.Event;
@@ -13,6 +13,8 @@
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import flash.geom.Point;
+	import flash.geom.ColorTransform;
+	import starling.filters.ColorMatrixFilter;
 	
 	public class Area extends ImageAlpha {
 		public static const AREA_SELECTED:String	= "areaSelected";
@@ -33,7 +35,6 @@
 		public var areaColor:uint 	= 0xFFFFFF;
 		public var isDefined:Boolean 	= false;
 		public var isWrong:Boolean 		= false;
-		
 		
 		public var hint:Hint;
 		public var minY:Number = 50;
@@ -82,14 +83,18 @@
 		private function onTouchArea(evt:TouchEvent):void {
 			try {
 				var touch:Touch; // = evt.getTouch(this)
-				touch = evt.getTouch(evt.currentTarget as DisplayObject, TouchPhase.HOVER);
+				touch = evt.getTouch(evt.currentTarget as Area, TouchPhase.HOVER);
+				
+				//var scN:Number = this.width <= 5 || this.height <= 5 ? 2 : this.width <= 20 || this.height <= 20 ? 1.5 : 1.1; // scale number
+				//var scN:Number = this.width <= 20 || this.height <= 2 ? 10 : 1.1; // scale number
+				//var cX:Number;
+				//var cY:Number;
 				
 				if (this.isDefined) {
 					// если уже определена область, то 
 					if (touch) {
 						// по наведению - подсказку и выделение
 						//addHint();
-						
 						!isWrong ? setColor(colorObj.colorCorrectHover) : setColor(colorObj.colorWrongHover);
 					}
 					else {
@@ -101,16 +106,41 @@
 				else {
 					// если область неизвестна
 					//if (touch) {
-						touch = evt.getTouch(evt.currentTarget as DisplayObject);
+						touch = evt.getTouch(evt.currentTarget as Area);
 						if (touch) {
 							// то по наведению - выделение
-							touch.phase == TouchPhase.HOVER ? setColor(colorObj.colorDefaultHover) : null;
+							if (touch.phase == TouchPhase.HOVER) {
+								setColor(colorObj.colorDefaultHover);
+								/*
+								if (this.scaleX != scN) { 
+									cX = (this.width * scN) - this.width;
+									cY = (this.height * scN) - this.height;
+									
+									this.scaleX = scN;
+									this.scaleY = scN;
+									
+									this.x -= cX / 2; 
+									this.y -= cY / 2; 
+								}
+								*/
+								//trace("x", this.x);
+							}
 							// по CLICK - проверку, правильно ли. dispatchEvent в getAnswer
 							touch.phase == TouchPhase.ENDED ? getAnswer() : null;
 							//touch.phase == TouchPhase.BEGAN ? setColor(0xFFFF00) : null;
 						}
 						else {
 							setColor();
+							/*
+							cX = this.width - (this.width / scN);
+							cY = this.height - (this.height / scN);
+							
+							this.scaleX = 1;
+							this.scaleY = 1;
+							
+							this.x += cX / 2; 
+							this.y += cY / 2; 
+							*/
 						}
 					//}
 					//else {
@@ -138,6 +168,9 @@
 				color = areaColor;
 			}
 			this.color = color;
+			//var filterRed:ColorMatrixFilter = new ColorMatrixFilter();
+			//filterRed.adjustHue(0.1);
+			//this.filter = filterRed;
 		}
 		
 		private function getAnswer():void {

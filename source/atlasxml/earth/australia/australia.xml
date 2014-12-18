@@ -1,0 +1,12 @@
+<Atlas name="Australia">
+  <Area name="Australia" x="10" y="239.5" />
+  <Area name="Fiji" x="656.5" y="294.5" />
+  <Area name="Kiribati" x="637" y="90" />
+  <Area name="MarshalIslands" x="574" y="7.5" />
+  <Area name="NewCaledonia" x="522" y="340" />
+  <Area name="NewZeland" x="407" y="503.5" />
+  <Area name="PapuaNewGuinea" x="319" y="144" />
+  <Area name="SolomonIslands" x="471" y="188" />
+  <Area name="Tuvalu" x="688" y="197" />
+  <Area name="Vanuatu" x="560.5" y="278.5" />
+</Atlas>
