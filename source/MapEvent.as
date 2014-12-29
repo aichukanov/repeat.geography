@@ -16,12 +16,14 @@
         private var _langObj:Object;
 		private var _bmp:Bitmap;
 		private var _bmpXML:XML;
+		private var _bg:Bitmap;
          
-		public function MapEvent(type:String, atlas:Object = null, bmp:Bitmap = null, bmpXML:XML = null, langObj:Object = null, bubbles:Boolean = false, cancelable:Boolean = false) {
+		public function MapEvent(type:String, atlas:Object = null, bmp:Bitmap = null, bmpXML:XML = null, langObj:Object = null, bg:Bitmap = null, bubbles:Boolean = false, cancelable:Boolean = false) {
  			super(type, bubbles, cancelable);
 			_atlas	= atlas;
 			_langObj 	= langObj;
 			_bmp	= bmp;
+			_bg 	= bg;
 			_bmpXML = bmpXML;
         }
 		
@@ -40,5 +42,10 @@
 		public function get bmpXML():XML {
 			return _bmpXML;
 		}
+		
+		public function get bg():Bitmap {
+			return _bg;
+		}
+		
     }
 }

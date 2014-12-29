@@ -11,6 +11,8 @@
 	public class GeographyPreloader extends MovieClip {
 		
 		//private var path:String = "http://repeat.cc/apps/geography/";
+		//private var path:String = "apps/geography/";
+		//private var path:String = "geography/";
 		private var path:String = "";
 		private var gameName:String = "Geography";
 		
@@ -28,7 +30,7 @@
 		}
 		
 		private function loadGame(gName:String):void {
-			var str:String = path + gName + ".swf";
+			var str:String = path + gName + ".swf?" + (Math.random() * 100).toString();
 			var loader:Loader = new Loader();
 			var req:URLRequest = new URLRequest(str);
 			trace(str);

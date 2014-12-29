@@ -1,18 +1,18 @@
 <Atlas name="NorthAmerica">
-  <Area name="Bahamas" x="569" y="473.25" />
-  <Area name="Belize" x="474.75" y="538.15"/>
-  <Area name="Canada" x="304" y="8"/>
-  <Area name="CostaRica" x="498.75" y="603.75"/>
-  <Area name="Cuba" x="520.75" y="495"/>
-  <Area name="DominicanRepublic" x="613.2" y="526.2"/>
-  <Area name="ElSalvador" x="466" y="573.2"/>
-  <Area name="Greenland" x="835.25" y="5"/>
-  <Area name="Guatemala" x="451" y="543.7"/>
-  <Area name="Haiti" x="600.1" y="525.9"/>
-  <Area name="Honduras" x="474.15" y="560.65"/>
-  <Area name="Mexico" x="294.1" y="410"/>
-  <Area name="Nicaragua" x="487.75" y="569.5"/>
-  <Area name="Panama" x="519" y="618"/>
-  <Area name="PuertoRico" x="650.4" y="537.9"/>
-  <Area name="USA" x="145" y="85"/>
+  <Area name="Bahamas" x="432" y="473.25" />
+  <Area name="Belize" x="337.75" y="538.15"/>
+  <Area name="Canada" x="167" y="8"/>
+  <Area name="CostaRica" x="367.75" y="603.75"/>
+  <Area name="Cuba" x="383.75" y="495"/>
+  <Area name="DominicanRepublic" x="474.2" y="526.2"/>
+  <Area name="ElSalvador" x="329" y="573.2"/>
+  <Area name="Greenland" x="698.25" y="5"/>
+  <Area name="Guatemala" x="314" y="543.7"/>
+  <Area name="Haiti" x="464.1" y="525.9"/>
+  <Area name="Honduras" x="337.15" y="560.65"/>
+  <Area name="Mexico" x="157.1" y="410"/>
+  <Area name="Nicaragua" x="350.75" y="569.5"/>
+  <Area name="Panama" x="382" y="618"/>
+  <Area name="PuertoRico" x="513.4" y="537.9"/>
+  <Area name="USA" x="8" y="85"/>
 </Atlas>

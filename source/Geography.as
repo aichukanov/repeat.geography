@@ -70,7 +70,7 @@
 				bottomLine.x = 0;
 				bottomLine.y = stage.stageHeight - bottomLine.height;
 				
-				//bottomLine.tf.text = "hi";
+				bottomLine.tf.text = "hi";
 			}
 			catch (e:Error) {
 				trace("Geography addBottomLine()",e.message);
@@ -176,7 +176,7 @@
 		
 		private function addMap():void {
 			try {
-				//bottomLine.tf.text = "addMap() " + curArea.toString() + " " + curArea;
+				bottomLine.tf.text = "addMap() " + curArea.toString() + " " + curArea;
 				if (map) {
 					removeChild(map);
 					map.clearMap();
@@ -185,17 +185,19 @@
 				addPreloader();
 				
 				map = new Map();
-				
-				map.loadMap(curLvl,curArea,lang);
 				map.addEventListener(MapEvent.MAP_LOAD_SUCCESS,onMapLoadSuccess);
 				map.addEventListener(MapEvent.MAP_LOAD_ERROR,onMapLoadError);
+				
+				map.loadMap(curLvl,curArea,lang);
 			}
 			catch (e:Error) {
 				trace("Geography addMap()",e.message);
+				bottomLine.tf.text = "addMap() " + e.message;
 			}
 			
 			function onMapLoadSuccess(evt:Event):void {
 				try {
+					bottomLine.tf.text = "onMapLoadSucces() ok";
 					removePreloader();
 					
 					addChild(map);
@@ -203,13 +205,14 @@
 					swapChildren(map,bottomLine);
 					
 					var sc:Number = (stage.stageHeight - (qh + margin) - (bh + margin)) / map.height;
+					//var sc:Number = 600 / map.height;
+					//trace("sc",sc,"height:", map.height,stage.height);
 					if (sc > stage.stageWidth / map.width) {
 						sc = stage.stageWidth / map.width;
 					}
 					map.scaleX = sc;
 					map.scaleY = sc;
-					
-					map.y = qh - margin;
+					map.y = qh + margin;
 					map.x = (stage.stageWidth - map.width) / 2;
 					
 					//addGameMenu();
@@ -224,18 +227,19 @@
 					//}
 				}
 				catch (e:Error) {
-					//bottomLine.tf.text = "onMapLoadSucces()" + e.message;
+					bottomLine.tf.text = "onMapLoadSucces()" + e.message;
 					trace("Geography onMapLoadSucces()",e.message);
 				}
 			}
 			
 			function onMapLoadError(evt:Event):void {
 				try {
+					bottomLine.tf.text = "onMapLoadError()";
 					// если не загружается нужная, то грузим карту уровнем выше
 					goUpMap();
 				}
 				catch (e:Error) {
-					//bottomLine.tf.text = "onMapLoadError()" + e.message;
+					bottomLine.tf.text = "onMapLoadError()" + e.message;
 					trace("Geography addMap onMapLoadError()",e.message);
 				}
 			}
@@ -261,12 +265,12 @@
 		}
 		
 		private function addPreloader():void {
-			!stage.contains(pLoader) ? stage.addChild(pLoader) : null;
+			!contains(pLoader) ? addChild(pLoader) : null;
 		}
 		
 		private function removePreloader():void {
 			pLoader.hidePL();
-			stage.contains(pLoader) ? stage.removeChild(pLoader) : null;
+			contains(pLoader) ? removeChild(pLoader) : null;
 		}
 		
 		private function startQuiz(obj:Object):void {
@@ -357,7 +361,7 @@
 				var a:Area;
 				for (var i:String in obj) {
 					//try {
-						a = map.getChildByName(obj[i].areaName) as Area;
+						a = map.areaSprite.getChildByName(obj[i].areaName) as Area;
 						a ? a.addEventListener(Area.AREA_SELECTED, onSelectArea) : null;
 					//}catch (e:Error) { trace("Geography setListenersMap() for i",i,e.message); }
 				}
@@ -369,7 +373,7 @@
 				var area:Area = evt.currentTarget as Area;
 				if (quizStarted) {
 					if (!quizPause) {
-						var areaRight:Area = map.getChildByName(quiz.areaName) as Area;
+						var areaRight:Area = map.areaSprite.getChildByName(quiz.areaName) as Area;
 						var isWrong:Boolean = map.onResponse(area,areaRight);
 						
 						if (!isWrong) {

@@ -18,19 +18,23 @@
 	public class GeoLoader extends Sprite {
 		
 		//private var path:String = "http://repeat.cc/apps/geography/";
+		//private var path:String = "apps/geography/";
+		//private var path:String = "geography/";
 		private var path:String = "";
 		
 		function GeoLoader() {
 			//
 		}
 		
+		// Load XML for Texture Atlas
 		public function loadAtlas(str:String):void {
 			try {
-				var loader:URLLoader 	= new URLLoader();			
-				var req:URLRequest 	 	= new URLRequest((path + "atlasxml/" + str + ".xml").toLowerCase());
-				loader.load(req);
+				var loader:URLLoader 	= new URLLoader();
+				var req:URLRequest 	= new URLRequest((path + "atlasxml/" + str + ".xml").toLowerCase());
+				
 				loader.addEventListener(Event.COMPLETE,loadAtlasHandler);
 				loader.addEventListener(IOErrorEvent.IO_ERROR, loadAtlasIOErrorHandler);
+				loader.load(req);
 			}
 			catch (e:Error) {
 				trace("GeoLoader loadAtlas()",e.message);
@@ -40,7 +44,7 @@
 				try {
 					loader.removeEventListener(Event.COMPLETE,loadAtlasHandler);
 					loader.removeEventListener(IOErrorEvent.IO_ERROR, loadAtlasIOErrorHandler);
-					
+				
 					dispatchEvent(new XMLEvent(XMLEvent.XML_LOAD_SUCCESS,XML(loader.data)));
 				}
 				catch (e:Error) {
@@ -62,6 +66,47 @@
 			}
 		}
 		
+		// Load PNG to Map background
+		public function loadMapBg(str:String):void {
+			try {
+				var loader:Loader	= new Loader();			
+				var req:URLRequest	= new URLRequest((path + "maps/" + str + "_bg.png").toLowerCase());
+				loader.load(req);
+				
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadMapBgHandler);
+				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, loadMapBgIOErrorHandler);
+			}
+			catch (e:Error) {
+				trace("GeoLoader loadMapBg()",e.message);
+			}
+			
+			function loadMapBgHandler(evt:Event):void {
+				try {
+					loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadMapBgHandler);
+					loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, loadMapBgIOErrorHandler);
+					
+					dispatchEvent(new ImageEvent(ImageEvent.IMAGE_LOAD_SUCCESS,loader.content as Bitmap));
+				}
+				catch (e:Error) {
+					trace("GeoLoader loadMapBgHandler()",e.message);
+				}
+			}
+			
+			function loadMapBgIOErrorHandler(evt:IOErrorEvent):void {
+				try {
+					loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadMapBgHandler);
+					loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, loadMapBgIOErrorHandler);	
+					
+					trace("GeoLoader loadMapBgIOErrorHandler()",evt.text);	
+					dispatchEvent(new ImageEvent(ImageEvent.IMAGE_LOAD_ERROR));
+				}
+				catch (e:Error) {
+					trace("GeoLoader loadMapBgIOErrorHandler()",e.message,evt.text);
+				}
+			}
+		}
+		
+		// Load PNG to Map
 		public function loadMapPNG(str:String):void {
 			try {
 				var loader:Loader	= new Loader();			
@@ -101,6 +146,7 @@
 			}
 		}
 		
+		// Load XML to Map
 		public function loadMapXML(str:String):void {
 			try {
 				var loader:URLLoader	= new URLLoader();	
@@ -139,6 +185,7 @@
 			}
 		}
 		
+		// Load XML for localization
 		public function loadLangXML(str:String,lang:String):void {
 			try {
 				var loader:URLLoader	= new URLLoader();	

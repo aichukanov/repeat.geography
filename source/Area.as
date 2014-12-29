@@ -85,12 +85,20 @@
 				var touch:Touch; // = evt.getTouch(this)
 				touch = evt.getTouch(evt.currentTarget as Area, TouchPhase.HOVER);
 				
-				//var scN:Number = this.width <= 5 || this.height <= 5 ? 2 : this.width <= 20 || this.height <= 20 ? 1.5 : 1.1; // scale number
-				//var scN:Number = this.width <= 20 || this.height <= 2 ? 10 : 1.1; // scale number
-				//var cX:Number;
-				//var cY:Number;
+				var scN:Number;
+				var cX:Number;
+				var cY:Number;
+								
+				if (this.width / this.scaleX <= 20 || this.height / this.scaleX  <= 20) {
+					scN = 2;
+				}
+				else {
+					scN = 1.1;
+				}
 				
 				if (this.isDefined) {
+					setDefScale(this);
+							
 					// если уже определена область, то 
 					if (touch) {
 						// по наведению - подсказку и выделение
@@ -105,52 +113,51 @@
 				}
 				else {
 					// если область неизвестна
-					//if (touch) {
-						touch = evt.getTouch(evt.currentTarget as Area);
-						if (touch) {
-							// то по наведению - выделение
-							if (touch.phase == TouchPhase.HOVER) {
-								setColor(colorObj.colorDefaultHover);
-								/*
-								if (this.scaleX != scN) { 
-									cX = (this.width * scN) - this.width;
-									cY = (this.height * scN) - this.height;
-									
-									this.scaleX = scN;
-									this.scaleY = scN;
-									
-									this.x -= cX / 2; 
-									this.y -= cY / 2; 
-								}
-								*/
-								//trace("x", this.x);
+					touch = evt.getTouch(evt.currentTarget as Area);
+					if (touch) {
+						// то по наведению - выделение
+						if (touch.phase == TouchPhase.HOVER) {
+							setColor(colorObj.colorDefaultHover);
+							
+							if (this.scaleX != scN) { 
+								cX = (this.width * scN) - this.width;
+								cY = (this.height * scN) - this.height;
+								
+								this.scaleX = scN;
+								this.scaleY = scN;
+								
+								this.x -= cX / 2; 
+								this.y -= cY / 2; 
+								
+								this.alpha = 0.4;
 							}
-							// по CLICK - проверку, правильно ли. dispatchEvent в getAnswer
-							touch.phase == TouchPhase.ENDED ? getAnswer() : null;
-							//touch.phase == TouchPhase.BEGAN ? setColor(0xFFFF00) : null;
 						}
-						else {
-							setColor();
-							/*
-							cX = this.width - (this.width / scN);
-							cY = this.height - (this.height / scN);
-							
-							this.scaleX = 1;
-							this.scaleY = 1;
-							
-							this.x += cX / 2; 
-							this.y += cY / 2; 
-							*/
-						}
-					//}
-					//else {
-						//trace('Area onTouchArea нет тача');
-						//setColor();
-					//}
+						// по CLICK - проверку, правильно ли. dispatchEvent в getAnswer
+						touch.phase == TouchPhase.ENDED ? getAnswer() : null;
+					}
+					else {
+						setColor();
+						setDefScale(this);							
+					}
 				}		
 			}
 			catch (e:Error) {
 				trace("Area onTouchCountry()",e.message);
+			}
+			
+			function setDefScale(t):void {
+				if (t.scaleX != 1) {
+					cX = t.width - (t.width / scN);
+					cY = t.height - (t.height / scN);
+					
+					t.scaleX = 1;
+					t.scaleY = 1;
+					
+					t.x += cX / 2; 
+					t.y += cY / 2; 
+					
+					t.alpha = 1;
+				}
 			}
 		}
 		

@@ -1,0 +1,85 @@
+<Atlas name="Russia">
+  <Area name="AdygeyaRep" x="14.5" y="502" />
+  <Area name="AlaniaRep" x="34.5" y="560" />
+  <Area name="AltaiKrai" x="414.5" y="553.5" />
+  <Area name="AltaiRep" x="469" y="579.5" />
+  <Area name="AmurObl" x="772" y="430" />
+  <Area name="ArchangelskObl" x="175.5" y="92" />
+  <Area name="AstrakhanObl" x="91.5" y="505" />
+  <Area name="BashkortostanRep" x="214.5" y="448" />
+  <Area name="BelgorodObl" x="50.50" y="414"/>
+  <Area name="BryanskObl" x="44.5" y="365.25"/>
+  <Area name="BuryatiaRep" x="607.5" y="474"/>
+  <Area name="ChechnyaRep" x="48.5" y="566.5"/>
+  <Area name="ChelyabinskObl" x="248.5" y="472"/>
+  <Area name="ChukotkaAOkrug" x="861.5" y="0"/>
+  <Area name="ChuvashiaRep" x="168.5" y="417"/>
+  <Area name="DagestanRep" x="49.5" y="551"/>
+  <Area name="IngushetiaRep" x="46.5" y="561"/>
+  <Area name="IrkutskObl" x="577.5" y="392"/>
+  <Area name="IvanovoObl" x="141.5" y="371"/>
+  <Area name="JewishAObl" x="916" y="507.5"/>
+  <Area name="KabardinoBalkariaRep" x="29.5" y="546"/>
+  <Area name="KaliningradObl" x="0" y="264.5"/>
+  <Area name="KalmykiaRep" x="49.5" y="503.5"/>
+  <Area name="KalugaObl" x="74.5" y="365"/>
+  <Area name="KamchatkaKrai" x="930.5" y="117"/>
+  <Area name="KarachayCherkessiaRep" x="16.5" y="529"/>
+  <Area name="KareliaRep" x="133.5" y="217"/>
+  <Area name="KemerovoObl" x="480" y="520"/>
+  <Area name="KhabarovskKrai" x="843" y="288"/>
+  <Area name="KhakassiaRep" x="507.5" y="540"/>
+  <Area name="KhantyMansiAOkrug" x="314" y="346"/>
+  <Area name="KirovObl" x="189.5" y="361"/>
+  <Area name="KomiRep" x="227.5" y="300"/>
+  <Area name="KostromaObl" x="153.5" y="360"/>
+  <Area name="KrasnodarKrai" x="1.5" y="480"/>
+  <Area name="KrasnoyarskKrai" x="469.5" y="127"/>
+  <Area name="KurganObl" x="287.5" y="478"/>
+  <Area name="KurskObl" x="50.5" y="392.5"/>
+  <Area name="LeningradObl" x="100.5" y="267"/>
+  <Area name="LipetskObl" x="80.5" y="404.5"/>
+  <Area name="MagadanObl" x="870.5" y="170"/>
+  <Area name="MariElRep" x="177.5" y="406"/>
+  <Area name="MordoviaRep" x="131.5" y="411"/>
+  <Area name="MoscowCity" x="113.5" y="371"/>
+  <Area name="MoscowObl" x="100.5" y="355"/>
+  <Area name="MurmanskObl" x="198.5" y="188"/>
+  <Area name="NenetsAOkrug" x="261.5" y="254"/>
+  <Area name="NizhnyNovgorodObl" x="140.5" y="387"/>
+  <Area name="NovgorodObl" x="92.5" y="298"/>
+  <Area name="NovosibirskObl" x="399.5" y="500"/>
+  <Area name="OmskObl" x="361.5" y="475"/>
+  <Area name="OrenburgObl" x="176.5" y="468.5"/>
+  <Area name="OryolObl" x="66.5" y="386"/>
+  <Area name="PenzaObl" x="124.5" y="424"/>
+  <Area name="PermKrai" x="239" y="382"/>
+  <Area name="PrimorskyKrai" x="953" y="485"/>
+  <Area name="PskovObl" x="69.5" y="281"/>
+  <Area name="RostovObl" x="33.5" y="459"/>
+  <Area name="RyazanObl" x="103.5" y="394"/>
+  <Area name="SaintPetersburgCity" x="117.5" y="281"/>
+  <Area name="SakhalinObl" x="952.5" y="389"/>
+  <Area name="SamaraObl" x="165" y="458.5"/>
+  <Area name="SaratovObl" x="109" y="444"/>
+  <Area name="SmolenskObl" x="63.5" y="334"/>
+  <Area name="StavropolKrai" x="34.5" y="511"/>
+  <Area name="SverdlovskObl" x="261.5" y="392"/>
+  <Area name="TambovObl" x="100.5" y="417"/>
+  <Area name="TatarstanRep" x="173.5" y="427"/>
+  <Area name="TomskObl" x="408.5" y="450"/>
+  <Area name="TulaObl" x="86.5" y="382"/>
+  <Area name="TuvaRep" x="516.5" y="564"/>
+  <Area name="TverObl" x="82.5" y="321"/>
+  <Area name="TyumenObl" x="321.5" y="446"/>
+  <Area name="UdmurtiaRep" x="212" y="413.5"/>
+  <Area name="UlyanovskObl" x="152.5" y="437"/>
+  <Area name="VladimirObl" x="127.5" y="369"/>
+  <Area name="VolgogradObl" x="74.5" y="453"/>
+  <Area name="VologdaObl" x="136.5" y="303"/>
+  <Area name="VoronezhObl" x="67.5" y="420.5"/>
+  <Area name="YakutiaRep" x="618.5" y="128"/>
+  <Area name="YamaloNenetsAOkrug" x="350.5" y="255"/>
+  <Area name="YaroslavlObl" x="133.5" y="343"/>
+  <Area name="ZabaykalskKrai"  x="699.5" y="451"/>	
+</Atlas>
