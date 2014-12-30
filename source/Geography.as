@@ -12,6 +12,8 @@
 	import starling.events.TouchPhase;
 	import starling.display.Image;
 	import starling.display.Button;
+	import starling.display.Quad;
+	import flash.utils.getTimer;
 	
 	public class Geography extends Sprite 
 	{	
@@ -20,11 +22,12 @@
 			question_ru: "Где находится "
 		}
 
-		private const topLevelMap:String = "earth"; //"earth"
+		private const topLevelMap:String 	= "earth"; //"earth"
+		private const timeToAnswer:uint 	= 5000;	// 5 секунд на ответ
 		
-		private const qh:Number 	= 40; // questionMC height
-		private const bh:Number 	= 40; // bottom line height
-		private const margin:Number = 10; // margin top and bottom
+		private const qh:Number 	= 0; // questionMC height
+		private const bh:Number 	= 0; // bottom line height
+		private const margin:Number = 0; // margin top and bottom
 	
 		private var lang:String		= "en";
 		private var curLvl:Array	= []; //["earth","europe"]
@@ -45,6 +48,15 @@
 		
 		private var quizObj:Object = new Object;
 		
+		private var pointTimer:uint = 0;
+		private var pointCounter:uint = 0;
+		
+		private var userObj:Object = {
+			userName: "user",
+			allPoints: 0,
+			areaPoints: 0
+		}
+		
 		public function Geography():void {
 			if (stage) init();
 			else addEventListener(Event.ADDED_TO_STAGE, init);
@@ -55,7 +67,7 @@
 				removeEventListener(Event.ADDED_TO_STAGE, init);
 				
 				addBottomLine();
-				addGameMenu();
+				//addGameMenu();
 				makePreLoader();
 				addMap();
 			}
@@ -70,7 +82,7 @@
 				bottomLine.x = 0;
 				bottomLine.y = stage.stageHeight - bottomLine.height;
 				
-				bottomLine.tf.text = "hi";
+				bottomLine.tf.text = "hi, " + userObj.userName + ". You have " + userObj.allPoints + " points";
 			}
 			catch (e:Error) {
 				trace("Geography addBottomLine()",e.message);
@@ -176,7 +188,7 @@
 		
 		private function addMap():void {
 			try {
-				bottomLine.tf.text = "addMap() " + curArea.toString() + " " + curArea;
+				//bottomLine.tf.text = "addMap() " + curArea.toString() + " " + curArea;
 				if (map) {
 					removeChild(map);
 					map.clearMap();
@@ -197,7 +209,7 @@
 			
 			function onMapLoadSuccess(evt:Event):void {
 				try {
-					bottomLine.tf.text = "onMapLoadSucces() ok";
+					//bottomLine.tf.text = "onMapLoadSucces() ok";
 					removePreloader();
 					
 					addChild(map);
@@ -207,13 +219,13 @@
 					var sc:Number = (stage.stageHeight - (qh + margin) - (bh + margin)) / map.height;
 					//var sc:Number = 600 / map.height;
 					//trace("sc",sc,"height:", map.height,stage.height);
-					if (sc > stage.stageWidth / map.width) {
-						sc = stage.stageWidth / map.width;
+					if (sc > (stage.stageWidth - 160) / map.width) {
+						sc = (stage.stageWidth - 160) / map.width;
 					}
 					map.scaleX = sc;
 					map.scaleY = sc;
-					map.y = qh + margin;
-					map.x = (stage.stageWidth - map.width) / 2;
+					map.y = (stage.stageHeight - map.height) / 2;
+					map.x = 160 + ((stage.stageWidth - 160) - map.width) / 2;
 					
 					//addGameMenu();
 					
@@ -234,7 +246,7 @@
 			
 			function onMapLoadError(evt:Event):void {
 				try {
-					bottomLine.tf.text = "onMapLoadError()";
+					//bottomLine.tf.text = "onMapLoadError()";
 					// если не загружается нужная, то грузим карту уровнем выше
 					goUpMap();
 				}
@@ -285,11 +297,19 @@
 				
 				quizStarted = true;
 				
+				if (quizRes) {
+					removeChild(quizRes);
+					quizRes.dispose();
+					quizRes = null;
+				}
 				quizRes = new QuizRes();
 				quizRes.countFull = areaArr.length;
 				addChild(quizRes);
-				quizRes.startTimer();
 				quizRes.x = stage.stageWidth - quizRes.width;
+				
+				quizRes.startTimer();
+				pointTimer = getTimer();
+				pointCounter = 0;
 				
 				quiz = new Quiz(areaArr);
 				
@@ -336,23 +356,41 @@
 				question = null;
 				
 				quizRes.stopTimer();
-				//quizRes.scaleX = 5;
-				//quizRes.scaleY = 5;
-				//quizRes.x = 100;
-				//quizRes.y = 100;
-				
-				removeChild(quizRes);
-				quizRes.dispose();
-				quizRes = null;
-				
 				quizStarted = false;
 				
+				quizRes.initFull();
+				quizRes.setPointsTF(pointCounter);
+				quizRes.x = (stage.stageWidth - quizRes.width) / 2;
+				quizRes.y = (stage.stageHeight - quizRes.height) / 2 - 50;
+				
+				var q:Quad = new Quad(stage.stageWidth,stage.stageHeight,0x000000);
+				addChild(q);
+				q.alpha = 0.01;
+				q.addEventListener(TouchEvent.TOUCH,onOkRes);
+				q.useHandCursor = true;
+				
+				userObj.allPoints < pointCounter ? userObj.allPoints = pointCounter : null;
+				bottomLine.tf.text = "hi, " + userObj.userName + ". You have " + userObj.allPoints + " points";
+				
 				map.setAreaDef();
-				//addGameMenu();
 				gameMenu.quizOff();
 			}
 			catch (e:Error) {
 				trace("Geography onQuizFinish()",e.message);
+			}
+			
+			function onOkRes(evt:TouchEvent):void {
+				try {
+					var t:Touch = evt.touches[0];
+					
+					if (t.phase == TouchPhase.ENDED) {
+						removeChild(evt.currentTarget as Quad);
+						quizRes.dispose();
+						removeChild(quizRes);
+					}
+				} catch (e:Error) {
+					trace("Geography onQuizFinish onOkRes()",e.message);
+				}
 			}
 		}
 		
@@ -373,10 +411,20 @@
 				var area:Area = evt.currentTarget as Area;
 				if (quizStarted) {
 					if (!quizPause) {
+						trace(getTimer() - pointTimer);
+						var timeSpent:int = getTimer() - pointTimer;
+						pointTimer += timeSpent;
+						
 						var areaRight:Area = map.areaSprite.getChildByName(quiz.areaName) as Area;
 						var isWrong:Boolean = map.onResponse(area,areaRight);
 						
 						if (!isWrong) {
+							// если потрачено времени больше, чем положено в timeToAnswer,
+							// то не даем очков
+							if (timeSpent < timeToAnswer) {
+								pointCounter += timeToAnswer - timeSpent
+							}
+							
 							quizRes.countCorrect++;
 							quizRes.setResTF();
 						}

@@ -42,7 +42,8 @@
 		}
 		
 		private function addBG():void {
-			bg = new Quad(bgWidth,bgHeight,0x666666);
+			//bg = new Quad(bgWidth,bgHeight,0x666666);
+			bg = new Quad(bgWidth,bgHeight,0x000000);
 			addChild(bg);
 		}
 		
