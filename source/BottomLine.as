@@ -13,12 +13,6 @@
 	 */
 	
 	public class BottomLine extends Sprite {
-		[Embed(source = "/Media/fonts/Roboto-Italic.ttf", embedAsCFF = "false", fontName = "RobotoItalic")]
-		private static const RobotoItalic:Class;
-		
-		[Embed(source = "/Media/fonts/Roboto-Light.ttf", embedAsCFF = "false", fontName = "RobotoLight")]
-		private static const RobotoLight:Class;
-		
 		public var tf:TextField;
 		
 		private var logo:Logo = new Logo();
@@ -58,7 +52,7 @@
 		}
 		
 		private function addTF():void {
-			var font:Font = new RobotoItalic();
+			var font:Font = new CustomFont.RobotoRegular();
 			tf = new TextField(this.width - logo.width - 10, this.height, "", font.fontName, 30, 0xFFFFFF);
 				
 			tf.vAlign = VAlign.CENTER;

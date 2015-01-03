@@ -16,10 +16,7 @@
 	import starling.utils.VAlign;
 	import starling.utils.HAlign;
 	
-	public class Hint extends Sprite {
-		[Embed(source = "/Media/fonts/Roboto-Italic.ttf", embedAsCFF = "false", fontName = "RobotoItalic")]
-		private static const RobotoItalic:Class;
-	 	
+	public class Hint extends Sprite {	 	
 		[Embed(source="/Media/hint/hint.png")]
 	 	private static const HintPNG:Class;
 		
@@ -28,7 +25,7 @@
 		private var desc:String;
 		private var bg:Image;
 		private var tf:TextField;
-		private var font:Font = new RobotoItalic();
+		private var font:Font = new CustomFont.RobotoItalic();
 		
 		function Hint(str:String) {
 			super();

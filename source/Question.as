@@ -13,9 +13,6 @@
 	 */
 	
 	public class Question extends Sprite {
-		[Embed(source = "/Media/fonts/Roboto-Italic.ttf", embedAsCFF = "false", fontName = "RobotoItalic")]
-		private static const RobotoItalic:Class;
-		
 		private var bg:Quad;
 		private var tf:TextField; 
 		
@@ -54,15 +51,15 @@
 		}
 		
 		private function makeTF():void {
-			var font:Font = new RobotoItalic();
+			var font:Font = new CustomFont.RobotoItalic();
 			tf = new TextField(qWidth, qHeight, qText, font.fontName, fSize, fColor);
-				
-			tf.vAlign = VAlign.CENTER;
+			
+			tf.vAlign = VAlign.TOP;
 			tf.hAlign = HAlign.CENTER;
 			
 			tf.x = bg.x;
 			tf.y = bg.y;
-							
+			tf.italic = true;
 			//this.addChild(bg);
 			this.addChild(tf);
 			

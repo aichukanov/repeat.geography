@@ -18,9 +18,6 @@
 	import starling.display.Button;
 	
 	public class MenuButton extends Button {		
-	 	[Embed(source = "/Media/fonts/Roboto-Light.ttf", embedAsCFF = "false", fontName = "RobotoLight")]
-		private static const RobotoLight:Class;
-		
 		[Embed(source="/Media/buttons/btn_bg.png")]
 	 	private static const BtnBGPNG:Class;
 		
@@ -29,7 +26,7 @@
 		//private var desc:String;
 		//private var bg:Image;
 		//private var tf:TextField;
-		private var font:Font = new RobotoLight();
+		private var font:Font = new CustomFont.RobotoRegular();
 		
 		function MenuButton(str:String) {
 			super(Texture.fromBitmap(new BtnBGPNG()),str);
@@ -44,7 +41,7 @@
 				removeEventListener(Event.ADDED_TO_STAGE, init);
 				
 				this.fontName = font.fontName;
-				this.fontColor = 0xFFFFFF;
+				this.fontColor = 0x000000;
 				this.fontSize = defFS;
 				this.scaleWhenDown = 0.98;
 			}

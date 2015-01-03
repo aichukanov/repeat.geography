@@ -18,13 +18,7 @@
 	import flash.utils.setInterval;
 	import flash.utils.clearInterval;
 	
-	public class QuizRes extends Sprite {
-		[Embed(source = "/Media/fonts/Roboto-Italic.ttf", embedAsCFF = "false", fontName = "RobotoItalic")]
-		private static const RobotoItalic:Class;
-	 	
-	 	//[Embed(source = "/Media/fonts/Roboto-Light.ttf", embedAsCFF = "false", fontName = "RobotoLight")]
-		//private static const RobotoLight:Class;
-		
+	public class QuizRes extends Sprite {		
 		[Embed(source="/Media/buttons/btn_bg.png")]
 	 	private static const BgPNG:Class;
 		
@@ -34,7 +28,7 @@
 		private static const defFS:uint 	= 20;
 		private static const defFSFull:uint = 50;
 		
-		private var font:Font = new RobotoItalic();
+		private var font:Font = new CustomFont.RobotoItalic();
 		//private var fontFull:Font = new RobotoLight();
 		private var bg:Image;
 		private var bgFull:Image;

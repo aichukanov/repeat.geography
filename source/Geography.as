@@ -67,7 +67,7 @@
 				removeEventListener(Event.ADDED_TO_STAGE, init);
 				
 				addBottomLine();
-				//addGameMenu();
+				addGameMenu();
 				makePreLoader();
 				addMap();
 			}
@@ -78,7 +78,7 @@
 			try {
 				bottomLine = new BottomLine(stage.stageWidth,bh);
 				addChild(bottomLine);
-				
+				bottomLine.visible = false;
 				bottomLine.x = 0;
 				bottomLine.y = stage.stageHeight - bottomLine.height;
 				
@@ -97,10 +97,8 @@
 					gameMenu.stopBtn.addEventListener(TouchEvent.TOUCH, onStopTouch);
 					gameMenu.upBtn.addEventListener(TouchEvent.TOUCH, onUpTouch);
 					
-					gameMenu.enBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
-					gameMenu.ruBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
-					//gameMenu.x = stage.width  / 2 - gameMenu.width  / 2;
-					//gameMenu.y = stage.height / 2 - gameMenu.height / 2;
+					//gameMenu.enBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
+					//gameMenu.ruBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
 				}
 			}
 			catch (e:Error) {
@@ -343,6 +341,7 @@
 			question = new Question(otherTextObj["question_" + lang] + quizObj[aName].transName + "?", qw, qh);
 			
 			addChild(question);
+			question.y = 0;
 			question.x = stage.stageWidth / 2 - question.width / 2;
 			//swapChildren(question,bottomLine);
 			swapChildren(question,gameMenu);
