@@ -25,7 +25,7 @@
 		
 		public var areaSprite:Sprite = new Sprite();
 		
-		private var langObj:Object 	= {};
+		//private var langObj:Object 	= {};
 		
 		function Map() {
 			super();
@@ -64,13 +64,15 @@
 			this.dispose();
 		}
 		
-		public function loadMap(curLvl:Array, curArea:String, lang:String = "en"):void {
+		//public function loadMap(curLvl:Array, curArea:String):void {
+		public function loadMap(fullNameArea:String):void {
 			try {
-				var fullNameArea:String = getAddress(curLvl,curArea);
+				//var fullNameArea:String = getAddress(curLvl,curArea);
 				
 				mapLoader.addEventListener(MapEvent.MAP_LOAD_SUCCESS,onMapLoaded);
 				mapLoader.addEventListener(MapEvent.MAP_LOAD_ERROR,onMapLoadError);
-				mapLoader.loadMap(fullNameArea,lang);
+				//mapLoader.loadMap(fullNameArea,lang);
+				mapLoader.loadMap(fullNameArea);
 			}
 			catch (e:Error) {
 				trace("Map loadMap()",e.message);
@@ -81,10 +83,11 @@
 					addBG(evt.bg);
 					
 					atlas = evt.atlas;
-					langObj = evt.langObj;
+					//langObj = evt.langObj;
 					addAtlas(atlas, evt.bmp, evt.bmpXML);
 					
-					dispatchEventWith(MapEvent.MAP_LOAD_SUCCESS,false,{atlas:evt.atlas, langObj:evt.langObj});
+					//dispatchEventWith(MapEvent.MAP_LOAD_SUCCESS,false,{atlas:evt.atlas, langObj:evt.langObj});
+					dispatchEventWith(MapEvent.MAP_LOAD_SUCCESS,false,{atlas:evt.atlas});
 				}
 				catch (e:Error) {
 					trace("Map loadMap onMapLoaded()", e.message);
@@ -115,8 +118,8 @@
 							area.x = atlasObj[i].x;
 							area.y = atlasObj[i].y;
 							
-							var cName:String = langObj[i].transName; // локализованное название
-							area.areaName = cName ? cName : i;
+							//var cName:String = langObj[i].transName; // локализованное название
+							//area.areaName = cName ? cName : i;
 							
 							areaSprite.addChild(area);
 						}
@@ -155,7 +158,7 @@
 				return tAtlas;
 			}
 		}
-		
+		/*
 		private function getAddress(arr:Array,area:String):String {
 			var str:String = "";
 			try {
@@ -167,7 +170,7 @@
 			}catch (e:Error) { trace("Map getAddress()", e.message); }
 			return str;
 		}
-		
+		*/
 		public function onResponse(area:Area, areaRight:Area):Boolean {
 			var isWrong:Boolean = false;
 			

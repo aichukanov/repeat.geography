@@ -184,7 +184,7 @@
 				}
 			}
 		}
-		
+		/*
 		// Load XML for localization
 		public function loadLangXML(str:String,lang:String):void {
 			try {
@@ -223,6 +223,7 @@
 				}
 			}
 		}
+		*/
 	}
 	
 }

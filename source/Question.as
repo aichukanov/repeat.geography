@@ -51,7 +51,7 @@
 		}
 		
 		private function makeTF():void {
-			var font:Font = new CustomFont.RobotoItalic();
+			var font:Font = new CustomFont.RobotoItalic;
 			tf = new TextField(qWidth, qHeight, qText, font.fontName, fSize, fColor);
 			
 			tf.vAlign = VAlign.TOP;

@@ -29,7 +29,9 @@
 		private const bh:Number 	= 0; // bottom line height
 		private const margin:Number = 0; // margin top and bottom
 	
-		private var lang:String		= "en";
+		private const gmWidth:uint	= 160; // width of gameMenu;
+		
+		private var lang:String		= "ru";
 		private var curLvl:Array	= []; //["earth","europe"]
 		private var curArea:String	= topLevelMap;
 		
@@ -37,16 +39,15 @@
 		private var question:Question;
 		private var quiz:Quiz;
 		private var quizRes:QuizRes;
+		private var pLoader:MapPreloader;
+		private var gameMenu:GameMenu;
+		private var langLoader:LangLoader;
 		
 		public var quizStarted:Boolean	= false;
 		public var quizPause:Boolean 	= false;
 		
-		private var bottomLine:BottomLine;
-		private var pLoader:MapPreloader;
-		
-		private var gameMenu:GameMenu = new GameMenu();
-		
-		private var quizObj:Object = new Object;
+		private var atlasObj:Object = new Object;
+		private var transAreaObj:Object = new Object;
 		
 		private var pointTimer:uint = 0;
 		private var pointCounter:uint = 0;
@@ -66,39 +67,33 @@
 			try {
 				removeEventListener(Event.ADDED_TO_STAGE, init);
 				
-				addBottomLine();
-				addGameMenu();
+				gameMenu = new GameMenu(lang);
+				langLoader = new LangLoader();
+				
 				makePreLoader();
+				addGameMenu();
+				loadAreaNames();
 				addMap();
 			}
 			catch (e:Error) { trace("Geography init()",e.message); }
 		}
-		
-		private function addBottomLine():void {
-			try {
-				bottomLine = new BottomLine(stage.stageWidth,bh);
-				addChild(bottomLine);
-				bottomLine.visible = false;
-				bottomLine.x = 0;
-				bottomLine.y = stage.stageHeight - bottomLine.height;
 				
-				bottomLine.tf.text = "hi, " + userObj.userName + ". You have " + userObj.allPoints + " points";
-			}
-			catch (e:Error) {
-				trace("Geography addBottomLine()",e.message);
-			}
-		}
-		
 		private function addGameMenu():void {
 			try {
 				if (!contains(gameMenu)) {
 					addChild(gameMenu);
+					
+					// меню справа
+					//gameMenu.x = stage.stageWidth - gmWidth;
+					// меню слева
+					gameMenu.x = 0;
+					gameMenu.y = 0;
+					
 					gameMenu.startBtn.addEventListener(TouchEvent.TOUCH, onStartTouch);
 					gameMenu.stopBtn.addEventListener(TouchEvent.TOUCH, onStopTouch);
 					gameMenu.upBtn.addEventListener(TouchEvent.TOUCH, onUpTouch);
 					
-					//gameMenu.enBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
-					//gameMenu.ruBtn.addEventListener(TouchEvent.TOUCH, switchLanguage);
+					gameMenu.addEventListener(LangEvent.SWITCH_LANGUAGE,switchLanguage);
 				}
 			}
 			catch (e:Error) {
@@ -106,16 +101,10 @@
 			}
 		}
 		
-		private function switchLanguage(evt:TouchEvent):void {
+		private function switchLanguage(evt:Event):void {
 			try {
-				var t:Touch = evt.touches[0];
-				
-				if (!quizStarted) {
-					if (t.phase == TouchPhase.ENDED) {
-						lang = (evt.currentTarget as Button).name;
-						addMap();
-					}
-				}
+				lang = evt.data.newLang;
+				loadAreaNames();
 			}
 			catch (e:Error) {
 				trace("Geography switchLanguage()",e.message);
@@ -133,12 +122,11 @@
 		}
 		
 		private function onStartTouch(evt:TouchEvent):void {
-			try {
-				var t:Touch = evt.touches[0];
-								
+			try {				
 				if (!quizStarted) {
+					var t:Touch = evt.touches[0];
 					if (t.phase == TouchPhase.ENDED) {
-						startQuiz(quizObj);
+						startQuiz(atlasObj);
 					}
 				}
 				else {
@@ -163,7 +151,7 @@
 				}
 			}
 			catch (e:Error) {
-				trace("Geography onStartTouch()",e.message);
+				trace("Geography onStopTouch()",e.message);
 			}
 		}
 		
@@ -184,9 +172,26 @@
 			}
 		}
 		
+		private function loadAreaNames():void {
+			langLoader.addEventListener(LangEvent.AREA_NAMES_LOAD_SUCCESS, onAreaNamesLoad);
+			langLoader.addEventListener(LangEvent.AREA_NAMES_LOAD_ERROR, onAreaNamesLoadError);
+			langLoader.loadLangXML(getAddress(curLvl,curArea),lang);
+		}
+		
+		private function onAreaNamesLoad(evt:LangEvent):void {
+			langLoader.removeEventListener(LangEvent.AREA_NAMES_LOAD_SUCCESS, onAreaNamesLoad);
+			langLoader.removeEventListener(LangEvent.AREA_NAMES_LOAD_ERROR, onAreaNamesLoadError);
+			
+			transAreaObj = evt.langObj;
+		}
+		
+		private function onAreaNamesLoadError(evt:LangEvent):void {
+			langLoader.removeEventListener(LangEvent.AREA_NAMES_LOAD_SUCCESS, onAreaNamesLoad);
+			langLoader.removeEventListener(LangEvent.AREA_NAMES_LOAD_ERROR, onAreaNamesLoadError);
+		}
+		
 		private function addMap():void {
 			try {
-				//bottomLine.tf.text = "addMap() " + curArea.toString() + " " + curArea;
 				if (map) {
 					removeChild(map);
 					map.clearMap();
@@ -198,58 +203,44 @@
 				map.addEventListener(MapEvent.MAP_LOAD_SUCCESS,onMapLoadSuccess);
 				map.addEventListener(MapEvent.MAP_LOAD_ERROR,onMapLoadError);
 				
-				map.loadMap(curLvl,curArea,lang);
+				map.loadMap(getAddress(curLvl,curArea));
 			}
 			catch (e:Error) {
 				trace("Geography addMap()",e.message);
-				bottomLine.tf.text = "addMap() " + e.message;
 			}
 			
 			function onMapLoadSuccess(evt:Event):void {
 				try {
-					//bottomLine.tf.text = "onMapLoadSucces() ok";
 					removePreloader();
 					
 					addChild(map);
 					
-					swapChildren(map,bottomLine);
-					
 					var sc:Number = (stage.stageHeight - (qh + margin) - (bh + margin)) / map.height;
-					//var sc:Number = 600 / map.height;
-					//trace("sc",sc,"height:", map.height,stage.height);
-					if (sc > (stage.stageWidth - 160) / map.width) {
-						sc = (stage.stageWidth - 160) / map.width;
+					if (sc > (stage.stageWidth - gmWidth) / map.width) {
+						sc = (stage.stageWidth - gmWidth) / map.width;
 					}
 					map.scaleX = sc;
 					map.scaleY = sc;
 					map.y = (stage.stageHeight - map.height) / 2;
-					map.x = 160 + ((stage.stageWidth - 160) - map.width) / 2;
+					// меню слева
+					map.x = gmWidth + ((stage.stageWidth - gmWidth) - map.width) / 2;
+					// меню справа
+					//map.x = ((stage.stageWidth - gmWidth) - map.width) / 2;
 					
-					//addGameMenu();
-					
-					//quizObj = evt.data.atlas;
-					quizObj = evt.data.langObj;
-					setListenersMap(quizObj);
-					
-					//startQuiz(evt.data.atlas);
-					//if (quizStarted) {
-						//addNewQuestion(quiz.areaName);
-					//}
+					atlasObj = evt.data.atlas;
+					setListenersMap(atlasObj);
 				}
 				catch (e:Error) {
-					bottomLine.tf.text = "onMapLoadSucces()" + e.message;
 					trace("Geography onMapLoadSucces()",e.message);
 				}
 			}
 			
 			function onMapLoadError(evt:Event):void {
 				try {
-					//bottomLine.tf.text = "onMapLoadError()";
 					// если не загружается нужная, то грузим карту уровнем выше
 					goUpMap();
 				}
 				catch (e:Error) {
-					bottomLine.tf.text = "onMapLoadError()" + e.message;
 					trace("Geography addMap onMapLoadError()",e.message);
 				}
 			}
@@ -263,6 +254,7 @@
 				curArea = curLvl.pop();
 			}
 			addMap();
+			loadAreaNames();
 		}
 		
 		private function makePreLoader():void {
@@ -288,8 +280,8 @@
 				var areaArr:Array = new Array;
 				
 				for (var i:String in obj) {
-					//areaArr.push(i);
-					areaArr.push(obj[i].areaName);
+					//areaArr.push(obj[i].areaName);
+					areaArr.push(i);
 				}
 				gameMenu.quizOn();
 				
@@ -331,20 +323,12 @@
 			removeChild(question);
 			question = null;
 			
-			// если оставлять спрайт с языками, то нужно сравнение, чтобы ровно по центру.
-			//var leftMargin:Number 	= gameMenu.stopBtn.width > gameMenu.langSprite.width 
-									//? gameMenu.stopBtn.width : gameMenu.langSprite.width;
-			// если языки прячем, то только двойная stopBtn
-			var leftMargin:Number 	= gameMenu.stopBtn.width;
-									
-			var qw:Number = stage.stageWidth - leftMargin * 2; 
-			question = new Question(otherTextObj["question_" + lang] + quizObj[aName].transName + "?", qw, qh);
+			var qw:Number = stage.stageWidth - gameMenu.width - quizRes.width; 
+			question = new Question(otherTextObj["question_" + lang] + transAreaObj[aName].transName + "?", qw, qh);
 			
 			addChild(question);
 			question.y = 0;
-			question.x = stage.stageWidth / 2 - question.width / 2;
-			//swapChildren(question,bottomLine);
-			swapChildren(question,gameMenu);
+			question.x = gameMenu.width;
 		}
 		
 		private function onQuizFinish(evt:Event = null):void {
@@ -369,7 +353,6 @@
 				q.useHandCursor = true;
 				
 				userObj.allPoints < pointCounter ? userObj.allPoints = pointCounter : null;
-				bottomLine.tf.text = "hi, " + userObj.userName + ". You have " + userObj.allPoints + " points";
 				
 				map.setAreaDef();
 				gameMenu.quizOff();
@@ -397,10 +380,11 @@
 			try {
 				var a:Area;
 				for (var i:String in obj) {
-					//try {
-						a = map.areaSprite.getChildByName(obj[i].areaName) as Area;
+					try {
+						//a = map.areaSprite.getChildByName(obj[i].areaName) as Area;
+						a = map.areaSprite.getChildByName(i) as Area;
 						a ? a.addEventListener(Area.AREA_SELECTED, onSelectArea) : null;
-					//}catch (e:Error) { trace("Geography setListenersMap() for i",i,e.message); }
+					}catch (e:Error) { trace("Geography setListenersMap() for i",i,e.message); }
 				}
 			}catch (e:Error) { trace("Geography setListenersMap()",e.message); }
 		}
@@ -410,7 +394,6 @@
 				var area:Area = evt.currentTarget as Area;
 				if (quizStarted) {
 					if (!quizPause) {
-						trace(getTimer() - pointTimer);
 						var timeSpent:int = getTimer() - pointTimer;
 						pointTimer += timeSpent;
 						
@@ -443,9 +426,23 @@
 					curArea = area.name;
 					
 					addMap();
+					loadAreaNames();
 				}
 			}
 			catch (e:Error) { trace("Geography onSelectArea()",e.message); }
 		}
+		
+		private function getAddress(arr:Array,area:String):String {
+			var str:String = "";
+			try {
+				for (var i:uint = 0; i < arr.length; i++) {
+					str += arr[i] + "/";
+				}
+				str.slice(0,str.length-1);
+				str += area + "/" + area;
+			}catch (e:Error) { trace("Geography getAddress()", e.message); }
+			return str;
+		}
+		
 	}
 }
