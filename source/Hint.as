@@ -17,7 +17,7 @@
 	import starling.utils.HAlign;
 	
 	public class Hint extends Sprite {	 	
-		[Embed(source="/Media/hint/hint.png")]
+		[Embed(source="../media/hint/hint.png")]
 	 	private static const HintPNG:Class;
 		
 		private static const defFS:uint = 30;

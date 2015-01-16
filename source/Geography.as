@@ -15,6 +15,11 @@
 	import starling.display.Quad;
 	import flash.utils.getTimer;
 	
+	import VerticalGameMenu.GameMenu;
+	import Localization.*;
+	import Quiz.*;
+	import Geo.*;
+	
 	public class Geography extends Sprite 
 	{	
 		private static const otherTextObj:Object = {
@@ -31,13 +36,13 @@
 	
 		private const gmWidth:uint	= 160; // width of gameMenu;
 		
-		private var lang:String		= "ru";
+		private var lang:String		= "en";
 		private var curLvl:Array	= []; //["earth","europe"]
 		private var curArea:String	= topLevelMap;
 		
 		private var map:Map;
 		private var question:Question;
-		private var quiz:Quiz;
+		private var quiz:ChoiceQuiz;
 		private var quizRes:QuizRes;
 		private var pLoader:MapPreloader;
 		private var gameMenu:GameMenu;
@@ -89,9 +94,9 @@
 					gameMenu.x = 0;
 					gameMenu.y = 0;
 					
-					gameMenu.startBtn.addEventListener(TouchEvent.TOUCH, onStartTouch);
-					gameMenu.stopBtn.addEventListener(TouchEvent.TOUCH, onStopTouch);
-					gameMenu.upBtn.addEventListener(TouchEvent.TOUCH, onUpTouch);
+					gameMenu.gameBtnsSprite.startBtn.addEventListener(TouchEvent.TOUCH, onStartTouch);
+					gameMenu.gameBtnsSprite.stopBtn.addEventListener(TouchEvent.TOUCH, onStopTouch);
+					gameMenu.mapBtnsSprite.upBtn.addEventListener(TouchEvent.TOUCH, onUpTouch);
 					
 					gameMenu.addEventListener(LangEvent.SWITCH_LANGUAGE,switchLanguage);
 				}
@@ -301,18 +306,19 @@
 				pointTimer = getTimer();
 				pointCounter = 0;
 				
-				quiz = new Quiz(areaArr);
+				quiz = new ChoiceQuiz(areaArr);
 				
-				quiz.addEventListener(Quiz.QUIZ_FINISH,onQuizFinish);
-				quiz.addEventListener(Quiz.QUIZ_NEXT_QUESTION,onNextQuestion);
+				quiz.addEventListener(QuizEvent.QUIZ_FINISH,onQuizFinish);
+				quiz.addEventListener(QuizEvent.QUIZ_NEXT_QUESTION,onNextQuestion);
 				quiz.nextQuestion();
 			}catch (e:Error) { trace("Geography startQuiz()",e.message); }
 		}
 		
 		private function onNextQuestion(evt:Event):void {
 			try {
-				var aName:String = evt.data.areaName; // area name
-				addNewQuestion(aName);
+				//var aName:String = evt.data.answer; // area name
+				//addNewQuestion(aName);
+				addNewQuestion(quiz.answer);
 			}
 			catch (e:Error) {
 				trace("Geography onNextQuestion()",e.message);
@@ -397,7 +403,7 @@
 						var timeSpent:int = getTimer() - pointTimer;
 						pointTimer += timeSpent;
 						
-						var areaRight:Area = map.areaSprite.getChildByName(quiz.areaName) as Area;
+						var areaRight:Area = map.areaSprite.getChildByName(quiz.answer) as Area;
 						var isWrong:Boolean = map.onResponse(area,areaRight);
 						
 						if (!isWrong) {
